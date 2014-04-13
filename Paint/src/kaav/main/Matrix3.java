@@ -49,7 +49,7 @@ public class Matrix3 {
 	 * {0,1,0} 
 	 * {0,0,1}
 	 */
-	static public Matrix3 multiplyFromLeft(Matrix3 mat1, Matrix3 mat2) {
+	static public Matrix3 multiply(Matrix3 mat1, Matrix3 mat2) {
 		Matrix3 newMatrix = new Matrix3();
 		float sum;
 
@@ -66,7 +66,26 @@ public class Matrix3 {
 
 		return newMatrix;
 	}
-
+	
+	/**
+	 * Apply the matrix to a Vector3.
+	 * @param mat1
+	 * @param vec1
+	 * @return
+	 */
+	static public Vector3 multiply(Matrix3 mat1, Vector3 vec1){
+		float value[] = new float[3];
+		
+		for (int v = 0; v < 3; v++){
+			
+			for (int i = 0; i < 3; i++){
+				value[v]+= mat1.h[i][v] * vec1.getVec()[i];
+			}
+		}
+		
+		return new Vector3(value[0], value[1], value[2]);
+	}
+	
 	/**
 	 * Print the matrix.
 	 */
