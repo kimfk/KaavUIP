@@ -18,7 +18,7 @@ import javax.swing.SwingUtilities;
  */
 
 //circle class 
-public class Circle extends JComponent {
+public class Circle extends JComponent implements Drawable{
      
     //varibales to save the intitial and end positions of mouse
     int mouseX, mouseY;

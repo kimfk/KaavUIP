@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 * 
 */
 
-public class FreeLine extends JPanel implements MouseListener, MouseMotionListener {
+public class FreeLine extends JPanel implements MouseListener, MouseMotionListener, Drawable {
     private int index = 0;
     private Point[] arr = new Point[100000];
     

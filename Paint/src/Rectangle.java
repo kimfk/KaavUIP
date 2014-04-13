@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -19,7 +20,7 @@ import javax.swing.SwingUtilities;
  */
 
 //circle class 
-public class Rectangle extends JComponent {
+public class Rectangle extends JComponent implements Drawable {
      
     //varibales to save the intitial and end positions of mouse
     int mouseX, mouseY;
