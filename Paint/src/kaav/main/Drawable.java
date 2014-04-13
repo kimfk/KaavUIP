@@ -14,4 +14,23 @@ public interface Drawable {
 	 * Draw the object on screen.
 	 */
 	void draw();
+	
+	/**
+	 * Scale by some factor
+	 * @param factor
+	 */
+	void scale(float factor);
+	
+	/**
+	 * Rotate by radians
+	 * @param radians
+	 */
+	void rotate(float radians);
+	
+	/**
+	 * Translate by some coordinates x and y.
+	 * @param x
+	 * @param y
+	 */
+	void translate(float x, float y);	
 }
