@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -20,7 +21,7 @@ import javax.swing.SwingUtilities;
  */
 
 //circle class 
-public class StraightLine extends JComponent {
+public class StraightLine extends JComponent implements Drawable {
      
     //varibales to save the intitial and end positions of mouse
     int mouseX, mouseY;
@@ -117,5 +118,10 @@ public class StraightLine extends JComponent {
         myFrame.setLayout(new BorderLayout());
         myFrame.add(new StraightLine(), BorderLayout.CENTER);
         myFrame.setVisible(true);
+    }
+
+    @Override
+    public void draw() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

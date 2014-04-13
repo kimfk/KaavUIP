@@ -18,7 +18,7 @@ import javax.swing.SwingUtilities;
  */
 
 //circle class 
-public class Circle extends JComponent {
+public class Circle extends JComponent implements Drawable{
      
     //varibales to save the intitial and end positions of mouse
     int mouseX, mouseY;
@@ -104,5 +104,10 @@ public class Circle extends JComponent {
         myFrame.setLayout(new BorderLayout());
         myFrame.add(new Circle(), BorderLayout.CENTER);
         myFrame.setVisible(true);
+    }
+
+    @Override
+    public void draw() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

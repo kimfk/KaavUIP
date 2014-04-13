@@ -1,5 +1,9 @@
 
+
 /*public class Triangle {
+=======
+public class Triangle implements Drawable{
+>>>>>>> 955721cda743c3097b6e958afa423a5e4da8e368
 
 }*/
 

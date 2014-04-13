@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 * 
 */
 
-public class FreeLine extends JPanel implements MouseListener, MouseMotionListener {
+public class FreeLine extends JPanel implements MouseListener, MouseMotionListener, Drawable {
     private int index = 0;
     private Point[] arr = new Point[100000];
     
@@ -61,5 +61,10 @@ public class FreeLine extends JPanel implements MouseListener, MouseMotionListen
 
     public static void main(String[] args) {
         FreeLine draw = new FreeLine("FreeLine");
+    }
+
+    @Override
+    public void draw() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
