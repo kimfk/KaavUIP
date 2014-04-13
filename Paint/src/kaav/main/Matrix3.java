@@ -1,4 +1,9 @@
 package kaav.main;
+
+/**
+ * This represents a matrix for geometry transformations. 
+ * @author Ganryu
+ */
 public class Matrix3 {
 	private float[][] h = new float[3][3];
 
@@ -10,10 +15,39 @@ public class Matrix3 {
 		h[1][1] = 1;
 		h[2][2] = 1;
 	}
+	
+	/**
+	 * Creates a new Matrix3 with the values as such:
+	 * {m11,m21,m31}
+	 * {m12,m22,m32}
+	 * {m13,m23,m33}
+	 * @param m11
+	 * @param m21
+	 * @param m31
+	 * @param m12
+	 * @param m22
+	 * @param m32
+	 * @param m13
+	 * @param m23
+	 * @param m33
+	 */
+	public Matrix3(float m11, float m21, float m31, float m12, float m22, float m32, float m13, float m23, float m33) {
+		h[0][0] = m11;
+		h[1][0] = m21;
+		h[2][0] = m31;
+		h[0][1] = m12;
+		h[1][1] = m22;
+		h[2][1] = m32;
+		h[0][2] = m13;
+		h[1][2] = m23;
+		h[2][2] = m33;
+	}
 
 	/**
-	 * Multiply two matrices to produce a new one. Form of matrix is {1,0,0}
-	 * {0,1,0} {0,0,1}
+	 * Multiply two matrices to produce a new one. Form of matrix is 
+	 * {1,0,0}
+	 * {0,1,0} 
+	 * {0,0,1}
 	 */
 	static public Matrix3 multiplyFromLeft(Matrix3 mat1, Matrix3 mat2) {
 		Matrix3 newMatrix = new Matrix3();
@@ -24,7 +58,7 @@ public class Matrix3 {
 				sum = 0;
 
 				for (int i = 0; i < 3; i++) {
-					sum += mat1.h[m][0] * mat2.h[0][0];
+					sum += mat1.h[m][i] * mat2.h[i][n];
 				}
 				newMatrix.h[m][n] = sum;
 			}
@@ -34,7 +68,7 @@ public class Matrix3 {
 	}
 
 	/**
-	 * 
+	 * Print the matrix.
 	 */
 	public void print() {
 		System.out.println(h[0][0] + " " + h[1][0] + " " + h[2][0]);
