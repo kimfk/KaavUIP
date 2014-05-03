@@ -61,8 +61,17 @@ public class Rectangle extends JComponent implements Drawable {
            
             
         }
- 
+      
+      @Override
+      public void mouseReleased(MouseEvent e) {
+       //mouseDragged = true;  
+       //repaint();
+      }
     };
+
+    Rectangle(int x, int y, int width, int height) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
  
     @Override
     public void paint(Graphics g) {
