@@ -17,10 +17,17 @@ public class Gesturizer {
 	private int N;
 	private int sizeK;
 	private double[] K; // kernel function
-	private double kernelSum;
+	private double kernelSum; // this is the sum of the kernel function
 	private Levenshtein levenshtein;
+
+	/**
+	 * The following HashMap maps gesture IDs to lists of sequence where each
+	 * sequence is a list of directions to represent a gesture. An ID can have
+	 * multiple sequences associated with it in order that we can make sure it
+	 * can recognize variations on gestures.
+	 */
 	private HashMap<Integer, ArrayList<ArrayList<Integer>>> sequenceMap;
-	private ArrayList<Integer> usedIDs;
+	private ArrayList<Integer> usedIDs; // This is a list of all used IDs.
 
 	/**
 	 * Initialize a new Gesturizer.
@@ -33,6 +40,9 @@ public class Gesturizer {
 		sequenceMap = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
 		usedIDs = new ArrayList<Integer>();
 
+		/**
+		 * This code initializes the kernel function.
+		 */
 		this.N = N;
 		sizeK = 1 + 2 * N;
 		K = new double[sizeK]; // set size of kernel function
@@ -69,7 +79,8 @@ public class Gesturizer {
 	}
 
 	/**
-	 * Finite Impulse Response Low-Pass Filter
+	 * Finite Impulse Response Low-Pass Filter used to smooth the incoming
+	 * coordinate vectors before we turn them into direction integers.
 	 * 
 	 * @param list
 	 * @param N
@@ -157,7 +168,9 @@ public class Gesturizer {
 	}
 
 	/**
-	 * Turns a vector array list into a list of integers representing directions.
+	 * Turns a vector array list into a list of integers representing
+	 * directions.
+	 * 
 	 * @param list
 	 * @return
 	 */
@@ -203,7 +216,7 @@ public class Gesturizer {
 			input[n] = list.get(n);
 		}
 
-		int bestID = -1;
+		int bestID = -1; // Stores the best ID we found so far
 		int bestDistance = Integer.MAX_VALUE;
 		int t; // temporary int
 

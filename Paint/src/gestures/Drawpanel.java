@@ -10,7 +10,12 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
+/**
+ * This panel is used for testing the output from the Gesturizer.
+ * It is not necessary for the main application and shouldn't be used there at all.
+ * @author Ganryu
+ *
+ */
 public class Drawpanel extends JFrame implements Runnable {
 	ArrayList<SimpleVector> base;
 	ArrayList<SimpleVector> result;
