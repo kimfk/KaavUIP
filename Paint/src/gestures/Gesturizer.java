@@ -20,7 +20,7 @@ public class Gesturizer {
 	private double kernelSum; // this is the sum of the kernel function
 	private Levenshtein levenshtein;
 
-	/**
+	/*
 	 * The following HashMap maps gesture IDs to lists of sequence where each
 	 * sequence is a list of directions to represent a gesture. An ID can have
 	 * multiple sequences associated with it in order that we can make sure it
@@ -239,6 +239,12 @@ public class Gesturizer {
 					// We have found a shorter distance
 					bestDistance = t;
 					bestID = i;
+
+					/*
+					 * Here the gesturizer should use the ID to find the
+					 * association GAction stored internally and call the .act()
+					 * method of that action. TODO
+					 */
 				}
 			}
 		}
