@@ -9,8 +9,9 @@ import javax.swing.AbstractAction;
 
 /**
  * Class to recognize gestures
+ * 
  * @author Andreas Lindmark
- *
+ * 
  */
 public class Gesturizer {
 	private int N;
@@ -98,6 +99,12 @@ public class Gesturizer {
 		return nlist;
 	}
 
+	/**
+	 * Helper for kernel function
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public double kernelFunction(int i) {
 		return K[i + N];
 	}
@@ -119,10 +126,18 @@ public class Gesturizer {
 				newList.add(new Integer(current));
 			}
 		}
-
 		return newList;
 	}
 
+	/**
+	 * Like streamlineRedundant except it will remove any vector sequences from
+	 * the main sequence unless that sequence is equal to or longer than some
+	 * threshold.
+	 * 
+	 * @param list
+	 * @param threshold
+	 * @return
+	 */
 	public ArrayList<Integer> streamlineSafe(ArrayList<Integer> list,
 			int threshold) {
 		ArrayList<Integer> newList = new ArrayList<Integer>();
@@ -132,17 +147,20 @@ public class Gesturizer {
 			if (current != list.get(i)) {
 				if (count >= threshold && current != -1)
 					newList.add(new Integer(current));
-
 				current = list.get(i);
 				count = 0;
 			} else {
 				count++;
 			}
 		}
-
 		return newList;
 	}
 
+	/**
+	 * Turns a vector array list into a list of integers representing directions.
+	 * @param list
+	 * @return
+	 */
 	public ArrayList<Integer> vectorize(ArrayList<SimpleVector> list) {
 		ArrayList<Integer> outList = new ArrayList<Integer>();
 
@@ -172,13 +190,13 @@ public class Gesturizer {
 		}
 	}
 
-	public void compare(ArrayList<SimpleVector> sequence){
+	public void compare(ArrayList<SimpleVector> sequence) {
 		ArrayList<SimpleVector> list = filter(sequence);
 		ArrayList<Integer> directions = vectorize(list);
 		directions = streamlineRedundant(directions);
 		compareAndTrigger(directions);
 	}
-	
+
 	public void compareAndTrigger(ArrayList<Integer> list) {
 		int[] input = new int[list.size()];
 		for (int n = 0; n < input.length; n++) {
@@ -188,7 +206,7 @@ public class Gesturizer {
 		int bestID = -1;
 		int bestDistance = Integer.MAX_VALUE;
 		int t; // temporary int
-		
+
 		ArrayList<ArrayList<Integer>> sequences;
 		// Look at each used ID
 		for (Integer i : usedIDs) {
@@ -203,15 +221,16 @@ public class Gesturizer {
 					seq[n] = sequence.get(n);
 				}
 				t = levenshtein.getDistance(input, seq);
-				
-				if (t < bestDistance){
+
+				if (t < bestDistance) {
 					// We have found a shorter distance
 					bestDistance = t;
 					bestID = i;
 				}
 			}
 		}
-		
-		System.out.println("Best ID: " + bestID + " Shortest Distance: " + bestDistance);
+
+		System.out.println("Best ID: " + bestID + " Shortest Distance: "
+				+ bestDistance);
 	}
 }

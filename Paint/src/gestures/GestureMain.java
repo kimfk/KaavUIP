@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
+/**
+ * This is a main class for testing the gesturizer
+ * @author Ganryu
+ *
+ */
 public class GestureMain {
 	public static void main(String argv[]){
 		Drawpanel dPanel = new Drawpanel();
@@ -15,6 +20,7 @@ public class GestureMain {
 		
 		ArrayList<SimpleVector> list = new ArrayList<SimpleVector>();
 		
+		// Build a set of datapoints for smoothing
 		double a;
 		double b;
 		double amplitude;
@@ -22,7 +28,6 @@ public class GestureMain {
 			amplitude = 50+Math.random()*60;			
 			a = Math.cos(((double)i/200)*2*Math.PI) * amplitude;
 			b = Math.sin(((double)i/200)*2*Math.PI) * amplitude;
-			
 			list.add(new SimpleVector(0+a, 0+b));
 		}
 
@@ -59,20 +64,9 @@ public class GestureMain {
 		square2.add(0);
 		square2.add(2);
 
-		
 		g.teach(5, square);
 		g.teach(5, square2);
 		g.compareAndTrigger(input);		
-		
-		
-		
-		/*for(SimpleVector sv : list)
-			sv.print();
-		
-		System.out.println("------------------------------------");
-		
-		for(SimpleVector sv : result)
-			sv.print();*/
 	}
 }
 
