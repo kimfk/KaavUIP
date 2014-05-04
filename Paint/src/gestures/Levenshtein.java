@@ -20,6 +20,11 @@ public class Levenshtein {
 		int y;
 		int z;
 		int t;
+
+		/**
+		 * Build an array to represent the problem as a matrix rather than
+		 * having to use recursion.
+		 */
 		for (int j = 1; j < b.length; j++) {
 			for (int i = 1; i < a.length; i++) {
 				if (a[i] == b[j]) {

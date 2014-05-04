@@ -44,8 +44,8 @@ public class GestureMain {
 		
 		//g.printK();
 		
-		dPanel.setListA(list);
-		dPanel.setListB(result);
+		dPanel.setBaseList(list);
+		dPanel.setResultList(result);
 		dPanel.setKernel(kernel);
 
 		ArrayList<Integer> input  = new ArrayList<Integer>();

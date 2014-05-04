@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -36,18 +35,21 @@ public class Drawpanel extends JFrame implements Runnable {
 		super.paint(g);
 		if (base == null) return;	
 		
+		// Draw unfiltered data
 		g.setColor(new Color(0,255,0));
 		for (int i = 0; i < base.size()-1; i++){
 			g.drawLine((int)base.get(i).getX()+400, (int)base.get(i).getY()+400, 
 					(int)base.get(i+1).getX()+400, (int)base.get(i+1).getY()+400);
 		}
 		
+		// Draw filtered data
 		g.setColor(new Color(255,0,0));
 		for (int i = 0; i < result.size()-1; i++){
 			g.drawLine((int)result.get(i).getX()+400, (int)result.get(i).getY()+400, 
 					(int)result.get(i+1).getX()+400, (int)result.get(i+1).getY()+400);
 		}
 		
+		// Draw kernel function
 		g.setColor(new Color(0,0,0));
 		for (int i = 0; i < kernel.size()-1; i++){
 			g.drawLine(400-kernel.size()/2 + i, 600 - (int)(kernel.get(i)*150.0), 
@@ -55,11 +57,11 @@ public class Drawpanel extends JFrame implements Runnable {
 		}
 	}
 
-	public void setListA(ArrayList<SimpleVector> list) {
+	public void setBaseList(ArrayList<SimpleVector> list) {
 		base = list;
 	}
 	
-	public void setListB(ArrayList<SimpleVector> list) {
+	public void setResultList(ArrayList<SimpleVector> list) {
 		result = list;
 	}
 	
