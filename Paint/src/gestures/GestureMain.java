@@ -64,8 +64,8 @@ public class GestureMain {
 		square2.add(0);
 		square2.add(2);
 
-		g.teach(5, square);
-		g.teach(5, square2);
+		g.teachSequence(5, square);
+		g.teachSequence(5, square2);
 		g.compareAndTrigger(input);		
 	}
 }

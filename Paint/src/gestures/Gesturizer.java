@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.swing.AbstractAction;
 
+import kaav.main.GAction;
+
 /**
  * Class to recognize gestures
  * 
@@ -28,6 +30,10 @@ public class Gesturizer {
 	 */
 	private HashMap<Integer, ArrayList<ArrayList<Integer>>> sequenceMap;
 	private ArrayList<Integer> usedIDs; // This is a list of all used IDs.
+	/*
+	 * This maps IDs to actions. Only one action per ID.
+	 */
+	private HashMap<Integer, GAction> actionMap;
 
 	/**
 	 * Initialize a new Gesturizer.
@@ -186,17 +192,30 @@ public class Gesturizer {
 	}
 
 	/**
+	 * Associate an ID with a GAction such that the .act() method the GAction
+	 * will be called if the Gesturizer matches the ID with a sequence just fed
+	 * into the system.
+	 * 
+	 * @param ID
+	 * @param action
+	 */
+	public void teachAction(int ID, GAction action) {
+		actionMap.put(ID, action);
+	}
+
+	/**
 	 * Teach the Gesturizer a new gesture and assign it an ID.
 	 * 
 	 * @param ID
 	 * @param list
 	 */
-	public void teach(int ID, ArrayList<Integer> list) {
+	public void teachSequence(int ID, ArrayList<Integer> list) {
 		if (!sequenceMap.containsKey(ID)) {
 			ArrayList<ArrayList<Integer>> nl = new ArrayList<ArrayList<Integer>>();
 			nl.add(list);
 			sequenceMap.put(ID, nl);
-			usedIDs.add(ID); // Remember that this ID ha been used
+			// Remember that this ID has been used
+			usedIDs.add(ID);
 		} else {
 			ArrayList<ArrayList<Integer>> sequences = sequenceMap.get(ID);
 			sequences.add(list);
@@ -240,11 +259,7 @@ public class Gesturizer {
 					bestDistance = t;
 					bestID = i;
 
-					/*
-					 * Here the gesturizer should use the ID to find the
-					 * association GAction stored internally and call the .act()
-					 * method of that action. TODO
-					 */
+					actionMap.get(bestID).act();
 				}
 			}
 		}

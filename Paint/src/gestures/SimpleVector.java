@@ -2,7 +2,7 @@ package gestures;
 
 /**
  * This is a two dimensional vector. Use these for finger coordinates and save
- * them in a list.
+ * them in a list. Pass them into an instance of Gesturizer.
  * 
  * @author Ganryu
  * 
