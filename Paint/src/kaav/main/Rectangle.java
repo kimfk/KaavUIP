@@ -1,15 +1,4 @@
-
-
-/*public class Triangle {
-=======
-public class Triangle implements Drawable{
->>>>>>> 955721cda743c3097b6e958afa423a5e4da8e368
-
-}*/
-
-
-/*public class Triangle {
-}*/
+package kaav.main;
 
 //package ;
 
@@ -21,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -31,7 +21,7 @@ import javax.swing.SwingUtilities;
  */
 
 //circle class 
-public class Triangle extends JComponent {
+public class Rectangle extends JComponent implements Drawable {
      
     //varibales to save the intitial and end positions of mouse
     int mouseX, mouseY;
@@ -48,7 +38,7 @@ public class Triangle extends JComponent {
     }
  
     //circle construction with mouse listener & Motion Listner 
-    public Triangle() {
+    public Rectangle() {
         addMouseListener(myMouseAdapter);
         addMouseMotionListener(myMouseAdapter);
     }
@@ -72,8 +62,17 @@ public class Triangle extends JComponent {
            
             
         }
- 
+      
+      @Override
+      public void mouseReleased(MouseEvent e) {
+       //mouseDragged = true;  
+       //repaint();
+      }
     };
+
+    Rectangle(int x, int y, int width, int height) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
  
     @Override
     public void paint(Graphics g) {
@@ -100,11 +99,7 @@ public class Triangle extends JComponent {
                 hight = mouseY_dragged - mouseY;
             }
              
-            //graphics2d.drawRect(x, y, width, hight);
-            
-            int[] xPoints = {mouseX , mouseX_dragged, mouseY_dragged}; //refelct x dragged and y
-            int[] yPoints = {mouseY, mouseY_dragged, mouseX_dragged}; //refelct x dragged and y
-            graphics2d.drawPolygon(xPoints, yPoints, 3);
+            graphics2d.drawRect(x, y, width, hight);
             
             
         }else{
@@ -119,7 +114,12 @@ public class Triangle extends JComponent {
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setSize(new Dimension(400, 300));
         myFrame.setLayout(new BorderLayout());
-        myFrame.add(new Triangle(), BorderLayout.CENTER);
+        myFrame.add(new Rectangle(), BorderLayout.CENTER);
         myFrame.setVisible(true);
+    }
+
+    @Override
+    public void draw() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

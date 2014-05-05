@@ -1,4 +1,4 @@
-
+package kaav.main;
 //package ;
 
 //imported libraries
@@ -9,7 +9,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -20,7 +19,7 @@ import javax.swing.SwingUtilities;
  */
 
 //circle class 
-public class Rectangle extends JComponent implements Drawable {
+public class Circle extends JComponent implements Drawable{
      
     //varibales to save the intitial and end positions of mouse
     int mouseX, mouseY;
@@ -37,7 +36,7 @@ public class Rectangle extends JComponent implements Drawable {
     }
  
     //circle construction with mouse listener & Motion Listner 
-    public Rectangle() {
+    public Circle() {
         addMouseListener(myMouseAdapter);
         addMouseMotionListener(myMouseAdapter);
     }
@@ -61,23 +60,14 @@ public class Rectangle extends JComponent implements Drawable {
            
             
         }
-      
-      @Override
-      public void mouseReleased(MouseEvent e) {
-       //mouseDragged = true;  
-       //repaint();
-      }
+ 
     };
-
-    Rectangle(int x, int y, int width, int height) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
  
     @Override
     public void paint(Graphics g) {
          
         Graphics2D graphics2d = (Graphics2D)g;
-        graphics2d.setColor(Color.GREEN);
+        graphics2d.setColor(Color.blue);
         if(mouseDragged){
             int x, y;
             int width, hight;
@@ -98,8 +88,8 @@ public class Rectangle extends JComponent implements Drawable {
                 hight = mouseY_dragged - mouseY;
             }
              
-            graphics2d.drawRect(x, y, width, hight);
-            
+            graphics2d.drawOval(x, y, width, hight);
+           // graphics2d.drawRect(x, y, w, h);
             
         }else{
             //graphics2d.fillOval(mouseX-5, mouseY-5, 10, 10);
@@ -113,7 +103,7 @@ public class Rectangle extends JComponent implements Drawable {
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setSize(new Dimension(400, 300));
         myFrame.setLayout(new BorderLayout());
-        myFrame.add(new Rectangle(), BorderLayout.CENTER);
+        myFrame.add(new Circle(), BorderLayout.CENTER);
         myFrame.setVisible(true);
     }
 

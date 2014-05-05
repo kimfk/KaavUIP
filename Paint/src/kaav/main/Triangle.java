@@ -1,3 +1,17 @@
+package kaav.main;
+
+
+/*public class Triangle {
+=======
+public class Triangle implements Drawable{
+>>>>>>> 955721cda743c3097b6e958afa423a5e4da8e368
+
+}*/
+
+
+/*public class Triangle {
+}*/
+
 //package ;
 
 //imported libraries
@@ -18,7 +32,7 @@ import javax.swing.SwingUtilities;
  */
 
 //circle class 
-public class Circle extends JComponent implements Drawable{
+public class Triangle extends JComponent {
      
     //varibales to save the intitial and end positions of mouse
     int mouseX, mouseY;
@@ -35,7 +49,7 @@ public class Circle extends JComponent implements Drawable{
     }
  
     //circle construction with mouse listener & Motion Listner 
-    public Circle() {
+    public Triangle() {
         addMouseListener(myMouseAdapter);
         addMouseMotionListener(myMouseAdapter);
     }
@@ -66,7 +80,7 @@ public class Circle extends JComponent implements Drawable{
     public void paint(Graphics g) {
          
         Graphics2D graphics2d = (Graphics2D)g;
-        graphics2d.setColor(Color.blue);
+        graphics2d.setColor(Color.GREEN);
         if(mouseDragged){
             int x, y;
             int width, hight;
@@ -87,8 +101,12 @@ public class Circle extends JComponent implements Drawable{
                 hight = mouseY_dragged - mouseY;
             }
              
-            graphics2d.drawOval(x, y, width, hight);
-           // graphics2d.drawRect(x, y, w, h);
+            //graphics2d.drawRect(x, y, width, hight);
+            
+            int[] xPoints = {mouseX , mouseX_dragged, mouseY_dragged}; //refelct x dragged and y
+            int[] yPoints = {mouseY, mouseY_dragged, mouseX_dragged}; //refelct x dragged and y
+            graphics2d.drawPolygon(xPoints, yPoints, 3);
+            
             
         }else{
             //graphics2d.fillOval(mouseX-5, mouseY-5, 10, 10);
@@ -102,12 +120,7 @@ public class Circle extends JComponent implements Drawable{
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setSize(new Dimension(400, 300));
         myFrame.setLayout(new BorderLayout());
-        myFrame.add(new Circle(), BorderLayout.CENTER);
+        myFrame.add(new Triangle(), BorderLayout.CENTER);
         myFrame.setVisible(true);
-    }
-
-    @Override
-    public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
