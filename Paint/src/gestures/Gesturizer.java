@@ -7,19 +7,33 @@ import java.util.Map;
 
 import javax.swing.AbstractAction;
 
+import kaav.main.GAction;
+
 /**
  * Class to recognize gestures
+ * 
  * @author Andreas Lindmark
- *
+ * 
  */
 public class Gesturizer {
 	private int N;
 	private int sizeK;
 	private double[] K; // kernel function
-	private double kernelSum;
+	private double kernelSum; // this is the sum of the kernel function
 	private Levenshtein levenshtein;
+
+	/*
+	 * The following HashMap maps gesture IDs to lists of sequence where each
+	 * sequence is a list of directions to represent a gesture. An ID can have
+	 * multiple sequences associated with it in order that we can make sure it
+	 * can recognize variations on gestures.
+	 */
 	private HashMap<Integer, ArrayList<ArrayList<Integer>>> sequenceMap;
-	private ArrayList<Integer> usedIDs;
+	private ArrayList<Integer> usedIDs; // This is a list of all used IDs.
+	/*
+	 * This maps IDs to actions. Only one action per ID.
+	 */
+	private HashMap<Integer, GAction> actionMap;
 
 	/**
 	 * Initialize a new Gesturizer.
@@ -32,6 +46,9 @@ public class Gesturizer {
 		sequenceMap = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
 		usedIDs = new ArrayList<Integer>();
 
+		/**
+		 * This code initializes the kernel function.
+		 */
 		this.N = N;
 		sizeK = 1 + 2 * N;
 		K = new double[sizeK]; // set size of kernel function
@@ -68,7 +85,8 @@ public class Gesturizer {
 	}
 
 	/**
-	 * Finite Impulse Response Low-Pass Filter
+	 * Finite Impulse Response Low-Pass Filter used to smooth the incoming
+	 * coordinate vectors before we turn them into direction integers.
 	 * 
 	 * @param list
 	 * @param N
@@ -98,6 +116,12 @@ public class Gesturizer {
 		return nlist;
 	}
 
+	/**
+	 * Helper for kernel function
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public double kernelFunction(int i) {
 		return K[i + N];
 	}
@@ -119,10 +143,18 @@ public class Gesturizer {
 				newList.add(new Integer(current));
 			}
 		}
-
 		return newList;
 	}
 
+	/**
+	 * Like streamlineRedundant except it will remove any vector sequences from
+	 * the main sequence unless that sequence is equal to or longer than some
+	 * threshold.
+	 * 
+	 * @param list
+	 * @param threshold
+	 * @return
+	 */
 	public ArrayList<Integer> streamlineSafe(ArrayList<Integer> list,
 			int threshold) {
 		ArrayList<Integer> newList = new ArrayList<Integer>();
@@ -132,17 +164,22 @@ public class Gesturizer {
 			if (current != list.get(i)) {
 				if (count >= threshold && current != -1)
 					newList.add(new Integer(current));
-
 				current = list.get(i);
 				count = 0;
 			} else {
 				count++;
 			}
 		}
-
 		return newList;
 	}
 
+	/**
+	 * Turns a vector array list into a list of integers representing
+	 * directions.
+	 * 
+	 * @param list
+	 * @return
+	 */
 	public ArrayList<Integer> vectorize(ArrayList<SimpleVector> list) {
 		ArrayList<Integer> outList = new ArrayList<Integer>();
 
@@ -155,40 +192,53 @@ public class Gesturizer {
 	}
 
 	/**
+	 * Associate an ID with a GAction such that the .act() method the GAction
+	 * will be called if the Gesturizer matches the ID with a sequence just fed
+	 * into the system.
+	 * 
+	 * @param ID
+	 * @param action
+	 */
+	public void teachAction(int ID, GAction action) {
+		actionMap.put(ID, action);
+	}
+
+	/**
 	 * Teach the Gesturizer a new gesture and assign it an ID.
 	 * 
 	 * @param ID
 	 * @param list
 	 */
-	public void teach(int ID, ArrayList<Integer> list) {
+	public void teachSequence(int ID, ArrayList<Integer> list) {
 		if (!sequenceMap.containsKey(ID)) {
 			ArrayList<ArrayList<Integer>> nl = new ArrayList<ArrayList<Integer>>();
 			nl.add(list);
 			sequenceMap.put(ID, nl);
-			usedIDs.add(ID); // Remember that this ID ha been used
+			// Remember that this ID has been used
+			usedIDs.add(ID);
 		} else {
 			ArrayList<ArrayList<Integer>> sequences = sequenceMap.get(ID);
 			sequences.add(list);
 		}
 	}
 
-	public void compare(ArrayList<SimpleVector> sequence){
+	public void compare(ArrayList<SimpleVector> sequence) {
 		ArrayList<SimpleVector> list = filter(sequence);
 		ArrayList<Integer> directions = vectorize(list);
 		directions = streamlineRedundant(directions);
 		compareAndTrigger(directions);
 	}
-	
+
 	public void compareAndTrigger(ArrayList<Integer> list) {
 		int[] input = new int[list.size()];
 		for (int n = 0; n < input.length; n++) {
 			input[n] = list.get(n);
 		}
 
-		int bestID = -1;
+		int bestID = -1; // Stores the best ID we found so far
 		int bestDistance = Integer.MAX_VALUE;
 		int t; // temporary int
-		
+
 		ArrayList<ArrayList<Integer>> sequences;
 		// Look at each used ID
 		for (Integer i : usedIDs) {
@@ -203,15 +253,18 @@ public class Gesturizer {
 					seq[n] = sequence.get(n);
 				}
 				t = levenshtein.getDistance(input, seq);
-				
-				if (t < bestDistance){
+
+				if (t < bestDistance) {
 					// We have found a shorter distance
 					bestDistance = t;
 					bestID = i;
+
+					actionMap.get(bestID).act();
 				}
 			}
 		}
-		
-		System.out.println("Best ID: " + bestID + " Shortest Distance: " + bestDistance);
+
+		System.out.println("Best ID: " + bestID + " Shortest Distance: "
+				+ bestDistance);
 	}
 }

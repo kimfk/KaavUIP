@@ -1,12 +1,14 @@
 package kaav.main;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
+
 /**
  * This class renders the objects to screen.
  * @author Ganryu
  *
  */
-public class RenderingEngine {
+public class RenderingEngine extends JPanel{
 	private GeometryContainer container;	
 	
 	/**
