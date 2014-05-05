@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
-import org.neuroph.core.NeuralNetwork;
-import org.neuroph.core.data.DataSet;
-import org.neuroph.core.learning.LearningRule;
+//import org.neuroph.core.NeuralNetwork;
+//import org.neuroph.core.data.DataSet;
+//import org.neuroph.core.learning.LearningRule;
 
 public class GestureMain {
 	public static void main(String argv[]){
