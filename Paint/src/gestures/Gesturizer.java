@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import actions.CreateCircle;
+import actions.CreateSquare;
 import kaav.main.GAction;
 
 /**
@@ -288,13 +289,53 @@ public class Gesturizer {
 	}
 	
 	public void configureDefaultSetup(){
-		ArrayList<Integer> square = new ArrayList<Integer>();
+		ArrayList<Integer> square;
+		ArrayList<Integer> circle;
+		
+		square = new ArrayList<Integer>();
 		square.add(0);
 		square.add(2);
 		square.add(4);
 		square.add(6);
 		teachSequence(4, square);
-		teachAction(4, new CreateCircle());
+		
+		square = new ArrayList<Integer>();
+		square.add(2);
+		square.add(4);
+		square.add(6);
+		square.add(0);
+		teachSequence(4, square);
+		
+		square = new ArrayList<Integer>();
+		square.add(4);
+		square.add(6);
+		square.add(0);
+		square.add(2);
+		teachSequence(4, square);
+
+		square = new ArrayList<Integer>();
+		square.add(6);
+		square.add(0);
+		square.add(2);
+		square.add(4);
+		teachSequence(4, square);
+		
+		teachAction(4, new CreateSquare());
 		System.out.println("Added square to ID #4");
+		
+		
+		circle = new ArrayList<Integer>();
+		square.add(0);
+		square.add(1);
+		square.add(2);
+		square.add(3);
+		square.add(4);
+		square.add(5);
+		square.add(6);
+		square.add(7);
+		teachSequence(5, square);
+		
+		teachAction(5, new CreateCircle());
+		System.out.println("Added square to ID #5");
 	}
 }
