@@ -42,17 +42,13 @@ public class SimpleVector {
 	 * @return
 	 */
 	public Integer getDirection() {
-		/*double angle = Math.atan2(y, x) + Math.PI;
-		System.out.println("angle: " + angle * (360 / (2 * Math.PI)));
-		int adj = (int) Math.floor(angle * (8 / (2 * Math.PI)));
-		return adj - 1;*/
-		
+		// TODO fix this later
 		double angle = Math.atan2(y, x);
 		angle = Math.atan2(y, x);
 		if (angle < 0)
 			angle+=Math.PI*2;
-		System.out.println("angle in degrees: " + angle * (360 / (2 * Math.PI)));
-		System.out.println("angle in radians" + angle);
+		//System.out.println("angle in degrees: " + angle * (360 / (2 * Math.PI)));
+		//System.out.println("angle in radians" + angle);
 		int adj = (int) Math.floor(angle * (8 / (2 * Math.PI)));
 		return adj;
 	}
@@ -75,6 +71,9 @@ public class SimpleVector {
 		System.out.println(x + " " + y);
 	}
 	
+	/**
+	 * Implementation of toString()
+	 */
 	@Override
 	public String toString(){
 		return "(" + x + "," + y + ")";

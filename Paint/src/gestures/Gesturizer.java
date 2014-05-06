@@ -2,11 +2,8 @@ package gestures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-import javax.swing.AbstractAction;
-
+import actions.CreateCircle;
 import kaav.main.GAction;
 
 /**
@@ -288,5 +285,16 @@ public class Gesturizer {
 
 		System.out.println("Best ID: " + bestID + " Shortest Distance: "
 				+ bestDistance);
+	}
+	
+	public void configureDefaultSetup(){
+		ArrayList<Integer> square = new ArrayList<Integer>();
+		square.add(0);
+		square.add(2);
+		square.add(4);
+		square.add(6);
+		teachSequence(4, square);
+		teachAction(4, new CreateCircle());
+		System.out.println("Added square to ID #4");
 	}
 }

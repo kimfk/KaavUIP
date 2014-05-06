@@ -8,7 +8,6 @@ import actions.*;
 /**
  * This is a main class for testing the gesturizer
  * @author Ganryu
- *
  */
 public class GestureMain {
 	public static void main(String argv[]){
@@ -84,6 +83,6 @@ public class GestureMain {
 		System.out.println(d6.getDirection());
 		System.out.println(d7.getDirection());
 		System.out.println(d8.getDirection());
+		System.out.println("TEST END");
 	}
 }
-
