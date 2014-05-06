@@ -65,7 +65,25 @@ public class GestureMain {
 
 		g.teachSequence(5, square);
 		g.teachAction(5, new CreateCircle());
-		g.compareAndTrigger(input);		
+		g.compareAndTrigger(input);	
+		
+		SimpleVector d1 = new SimpleVector(1,0);
+		SimpleVector d2 = new SimpleVector(1,1);
+		SimpleVector d3 = new SimpleVector(0,1);
+		SimpleVector d4 = new SimpleVector(-1,1);
+		SimpleVector d5 = new SimpleVector(-1,0);
+		SimpleVector d6 = new SimpleVector(-1,-1);
+		SimpleVector d7 = new SimpleVector(0,-1);
+		SimpleVector d8 = new SimpleVector(1,-1);
+		System.out.println("--------------------");
+		System.out.println(d1.getDirection());
+		System.out.println(d2.getDirection());
+		System.out.println(d3.getDirection());
+		System.out.println(d4.getDirection());
+		System.out.println(d5.getDirection());
+		System.out.println(d6.getDirection());
+		System.out.println(d7.getDirection());
+		System.out.println(d8.getDirection());
 	}
 }
 
