@@ -44,6 +44,7 @@ public class Gesturizer {
 	public Gesturizer(int N, int m) {
 		levenshtein = new Levenshtein();
 		sequenceMap = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
+		actionMap = new HashMap<Integer, GAction>();
 		usedIDs = new ArrayList<Integer>();
 
 		/**

@@ -3,6 +3,7 @@ package gestures;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
+import actions.*;
 
 /**
  * This is a main class for testing the gesturizer
@@ -42,8 +43,6 @@ public class GestureMain {
 			System.out.println(v.getDirection());
 		}
 		
-		//g.printK();
-		
 		dPanel.setBaseList(list);
 		dPanel.setResultList(result);
 		dPanel.setKernel(kernel);
@@ -66,6 +65,7 @@ public class GestureMain {
 
 		g.teachSequence(5, square);
 		g.teachSequence(5, square2);
+		g.teachAction(5, new CreateCircle());
 		g.compareAndTrigger(input);		
 	}
 }

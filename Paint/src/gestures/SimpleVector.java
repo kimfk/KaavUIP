@@ -65,4 +65,10 @@ public class SimpleVector {
 	public void print() {
 		System.out.println(x + " " + y);
 	}
+	
+	@Override
+	public String toString(){
+		return "(" + x + "," + y + ")";
+		
+	}
 }
