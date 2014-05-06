@@ -7,6 +7,9 @@ package leapMotion;
 * between Leap Motion and you, your company or other organization.             *
 \******************************************************************************/
 //THIS ONE WORKSSS!!!!
+import gestures.Gesturizer;
+import gestures.SimpleVector;
+
 import java.io.IOException;
 import java.lang.Math;
 import java.util.ArrayList;
@@ -14,9 +17,15 @@ import java.util.ArrayList;
 import com.leapmotion.leap.*;
 import com.leapmotion.leap.Gesture.State;
 
-class SampleListener extends Listener {
+class LeapMotionDetectsMovement extends Listener {
 
-    public ArrayList<Vector> coordinateslist = new ArrayList<Vector>();
+    public ArrayList<SimpleVector> coordinateslist = new ArrayList<SimpleVector>();
+    public Gesturizer gesturizer;
+    
+	public LeapMotionDetectsMovement(Gesturizer gesturizer) {
+		this.gesturizer = gesturizer;
+	}
+
 	public void onInit(Controller controller) {
         System.out.println("Initialized");
     }
@@ -39,46 +48,27 @@ class SampleListener extends Listener {
         Frame frame = controller.frame();
         int amount_fingers = frame.fingers().count();
         int amount_hands = frame.hands().count();
-        Vector position = frame.fingers().get(0).tipPosition();
-    
+        Vector position =  frame.fingers().get(0).tipPosition();
+        int simplevectorx, simplevectory;
+        Vector temporary;
+        
         if (amount_fingers > 0){
         	if(position.getZ() < 0) {
-        		coordinateslist.add(frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition()));
+        		temporary = frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition());
+        		coordinateslist.add(new SimpleVector(temporary.getX(), temporary.getY()));
         		System.out.println("- Z, add to the list : " + frame.fingers().get(0).tipPosition());
         		//coordinateslist.add(frame.fingers().get(0).tipPosition());
         	}
         	else if((position.getZ()>0) && !coordinateslist.isEmpty()){
-        	        		
-        		System.out.println("Now i will send the list to andreas: " + coordinateslist.toString());
-        		coordinateslist = new ArrayList<Vector>();
+        	    System.out.println("Now i will send the list to andreas: " + coordinateslist.toString());
+        	    gesturizer.compare(coordinateslist);
+        		coordinateslist = new ArrayList<SimpleVector>();
         	
-        	}
-        		
+        	} 		
        }
-        	
-   
+
   	}
          
 }
 
-class LeapMotionDetectsMovement {
-    public static void main(String[] args) {
-        // Create a sample listener and controller
-        SampleListener listener = new SampleListener();
-        Controller controller = new Controller();
 
-        // Have the sample listener receive events from the controller
-        controller.addListener(listener);
-
-        // Keep this process running until Enter is pressed
-        System.out.println("Press Enter to quit...");
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Remove the sample listener when done
-        controller.removeListener(listener);
-    }
-}
