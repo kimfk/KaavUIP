@@ -64,7 +64,6 @@ public class GestureMain {
 		square2.add(2);
 
 		g.teachSequence(5, square);
-		g.teachSequence(5, square2);
 		g.teachAction(5, new CreateCircle());
 		g.compareAndTrigger(input);		
 	}

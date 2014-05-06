@@ -183,13 +183,13 @@ public class Gesturizer {
 	 */
 	public ArrayList<Integer> vectorize(ArrayList<SimpleVector> list) {
 		ArrayList<Integer> outList = new ArrayList<Integer>();
-
+		
 		for (int i = 0; i < list.size() - 1; i++) {
 			outList.add(SimpleVector.subtract(list.get(i + 1), list.get(i))
 					.getDirection());
 		}
 
-		return streamlineRedundant(outList);
+		return outList;
 	}
 
 	/**
@@ -224,13 +224,34 @@ public class Gesturizer {
 	}
 
 	public void compare(ArrayList<SimpleVector> sequence) {
+		// Filter the input sequence 
 		ArrayList<SimpleVector> list = filter(sequence);
+		double maximumX = Double.NEGATIVE_INFINITY; // rightmost point
+		double minimumX = Double.POSITIVE_INFINITY; // leftmost point
+		double maximumY = Double.NEGATIVE_INFINITY; // topmost point
+		double minimumY = Double.POSITIVE_INFINITY ; // bottommost point
+		
+		/*
+		 * Find the leftmost and rightmost extent of
+		 * the filtered sequence.
+		 */
+		for (SimpleVector v : sequence){
+			maximumX = Math.max(v.getX(), maximumX);
+			minimumX = Math.min(v.getX(), minimumX);
+			maximumY = Math.max(v.getY(), maximumX);
+			minimumY = Math.min(v.getY(), minimumY);
+		}
+		
+		// Vectorize the input list
 		ArrayList<Integer> directions = vectorize(list);
+		
+		// Streamline the vector list
 		directions = streamlineRedundant(directions);
 		compareAndTrigger(directions);
 	}
 
 	public void compareAndTrigger(ArrayList<Integer> list) {
+		
 		int[] input = new int[list.size()];
 		for (int n = 0; n < input.length; n++) {
 			input[n] = list.get(n);
