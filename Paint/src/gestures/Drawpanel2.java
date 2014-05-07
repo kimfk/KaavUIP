@@ -40,22 +40,22 @@ public class Drawpanel2 extends JFrame implements Runnable {
 		// Draw unfiltered data
 		g.setColor(new Color(0,255,0));
 		for (int i = 0; i < base.size()-1; i++){
-			g.drawLine((int)(600*base.get(i).getX()), -(int)(600*base.get(i).getY()), 
-					(int)(600*base.get(i+1).getX()), -(int)(600*base.get(i+1).getY()));
+			g.drawLine((int)(600*base.get(i).getX()), 600-(int)(600*base.get(i).getY()), 
+					(int)(600*base.get(i+1).getX()), 600-(int)(600*base.get(i+1).getY()));
 		}
 		
 		// Draw filtered data
 		g.setColor(new Color(255,0,0));
 		for (int i = 0; i < result.size()-1; i++){
-			g.drawLine((int)(600*result.get(i).getX()), -(int)(600*result.get(i).getY()), 
-					(int)(600*result.get(i+1).getX()), -(int)(600*result.get(i+1).getY()));
+			g.drawLine((int)(600*result.get(i).getX()), 600-(int)(600*result.get(i).getY()), 
+					(int)(600*result.get(i+1).getX()), 600-(int)(600*result.get(i+1).getY()));
 		}
 		
 		// Draw filtered data
 		g.setColor(new Color(0,0,0));
 		for (int i = 0; i < lastout.size()-1; i++){
-			g.drawLine((int)(600*lastout.get(i).getX()), -(int)(600*lastout.get(i).getY()), 
-					(int)(600*lastout.get(i+1).getX()), -(int)(600*lastout.get(i+1).getY()));
+			g.drawLine((int)(600*lastout.get(i).getX()), 600-(int)(600*lastout.get(i).getY()), 
+					(int)(600*lastout.get(i+1).getX()), 600-(int)(600*lastout.get(i+1).getY()));
 		}
 	}
 
