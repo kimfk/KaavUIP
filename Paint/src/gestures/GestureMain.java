@@ -18,13 +18,6 @@ public class GestureMain {
 		Drawpanel2 panel2 = new Drawpanel2();
 		SwingUtilities.invokeLater(panel2);		
 		
-		ArrayList<SimpleVector> ol = new ArrayList<SimpleVector>();
-		ol.add(new SimpleVector(-1,1));
-		ol.add(new SimpleVector(1,0));
-		ol.add(new SimpleVector(-1,0));
-		ol.add(new SimpleVector(1,1));
-		panel2.setOutList(ol);
-		
 		Levenshtein l = new Levenshtein();
 		//l.getDistance(new int[]{1, 1, 1}, new int[]{1, 1, 1});
 		//l.getDistance(new int[]{1, 1, 3, 5}, new int[]{3, 2, 1});
@@ -45,6 +38,7 @@ public class GestureMain {
 		Gesturizer g = new Gesturizer(400, 110);
 		ArrayList<SimpleVector> result = g.filter(list);
 		ArrayList<Double> kernel = g.getKernel();
+		g.setPanel(panel2);
 		
 		for (int i = 0; i < 60; i ++){
 			SimpleVector v = new SimpleVector(
@@ -75,7 +69,15 @@ public class GestureMain {
 
 		g.teachSequence(5, square);
 		g.teachAction(5, new CreateCircle());
-		g.compareAndTrigger(input);	
+		//g.compareAndTrigger(input);	
+		
+		ArrayList<SimpleVector> testList = new ArrayList<SimpleVector>();
+		testList.add(new SimpleVector(-2.0/4,	0.0/4));
+		testList.add(new SimpleVector(-1.0/4,	2.0/4));
+		testList.add(new SimpleVector( 1.0/4,	0.0/4));
+		testList.add(new SimpleVector( 2.0/4,	2.0/4));
+		
+		g.compare(testList);
 		
 		SimpleVector d1 = new SimpleVector(1,0);
 		SimpleVector d2 = new SimpleVector(1,1);
