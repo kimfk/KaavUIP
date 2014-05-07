@@ -230,9 +230,9 @@ public class Gesturizer {
 		panel.setResultList(list);
 		
 		ArrayList<SimpleVector> ol = new ArrayList<SimpleVector>();
-		ol.add(new SimpleVector(-1,1));
+		ol.add(new SimpleVector(0,1));
 		ol.add(new SimpleVector(1,0));
-		ol.add(new SimpleVector(-1,0));
+		ol.add(new SimpleVector(0,0));
 		ol.add(new SimpleVector(1,1));
 		panel.setOutList(ol);
 		
