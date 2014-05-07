@@ -1,8 +1,11 @@
 package leapMotion;
 
+import gestures.Drawpanel2;
 import gestures.Gesturizer;
 
 import java.io.IOException;
+
+import javax.swing.SwingUtilities;
 
 import com.leapmotion.leap.Controller;
 
@@ -11,6 +14,9 @@ public class MainLeapMotion {
 	public static void main(String[] args) {
 		// Create a sample listener and controller
 		gestures.Gesturizer gesturizer = new Gesturizer(400, 110);
+		Drawpanel2 panel = new Drawpanel2();
+		gesturizer.setPanel(panel);
+		SwingUtilities.invokeLater(panel);
 		LeapMotionDetectsMovement listener = new LeapMotionDetectsMovement(gesturizer);
 	    Controller controller = new Controller();
 
