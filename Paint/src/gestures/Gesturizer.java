@@ -228,6 +228,7 @@ public class Gesturizer {
 		// Filter the input sequence 
 		ArrayList<SimpleVector> list = filter(sequence);
 		panel.setResultList(list);
+
 		
 		double maximumX = Double.NEGATIVE_INFINITY; // rightmost point
 		double minimumX = Double.POSITIVE_INFINITY; // leftmost point
