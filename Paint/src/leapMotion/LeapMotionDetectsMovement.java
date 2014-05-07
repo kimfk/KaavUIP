@@ -24,6 +24,8 @@ class LeapMotionDetectsMovement extends Listener {
     
 	public LeapMotionDetectsMovement(Gesturizer gesturizer) {
 		this.gesturizer = gesturizer;
+	    gesturizer.configureDefaultSetup();
+	    
 	}
 
 	public void onInit(Controller controller) {
@@ -52,20 +54,40 @@ class LeapMotionDetectsMovement extends Listener {
         int simplevectorx, simplevectory;
         Vector temporary;
         
-        if (amount_fingers > 0){
-        	if(position.getZ() < 0) {
-        		temporary = frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition());
-        		coordinateslist.add(new SimpleVector(temporary.getX(), temporary.getY()));
-        		System.out.println("- Z, add to the list : " + frame.fingers().get(0).tipPosition());
-        		//coordinateslist.add(frame.fingers().get(0).tipPosition());
-        	}
-        	else if((position.getZ()>0) && !coordinateslist.isEmpty()){
-        	    System.out.println("Now i will send the list to andreas: " + coordinateslist.toString());
-        	    gesturizer.compare(coordinateslist);
-        		coordinateslist = new ArrayList<SimpleVector>();
+        if (amount_hands == 1){
+        	if (amount_fingers > 0){
+		    	//Amount fingers = 1 --> Free drawing
+		    	if(amount_fingers == 1){
+		    		if(position.getZ() < 0) {
+		    		temporary = frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition());
+		    		coordinateslist.add(new SimpleVector(temporary.getX(), temporary.getY()));
+		    		System.out.println("- Z, add to the list : " + frame.fingers().get(0).tipPosition());
+		    		//coordinateslist.add(frame.fingers().get(0).tipPosition());
+		    	}
+		    	else if((position.getZ()>0) && !coordinateslist.isEmpty()){
+		    	    System.out.println("Now i will send the list to andreas: " + coordinateslist.toString());
+		    	    gesturizer.compare(coordinateslist);
+		    		coordinateslist.clear();
+		    	} 		
+		    }
+		    	
+	    	//amount fingers = 2 --> replacing
+	    	else if(amount_fingers == 2 && position.getZ() < 0){
+	    		System.out.println("Drag item to new position: " +frame.fingers().get(0).tipPosition());
+	        	//send new coordinates to andreas 
+	        	coordinateslist.clear();		
+	    	}
         	
-        	} 		
-       }
+        	}	
+        }
+        
+        if (amount_hands ==2){
+        	System.out.println("The figure is now placed");
+        	coordinateslist.clear();
+        	//Say that this figure can be printed on the spot where he now is. 
+        }
+        	
+        
 
   	}
          
