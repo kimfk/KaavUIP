@@ -52,7 +52,7 @@ public class Drawpanel2 extends JFrame implements Runnable {
 		}
 		
 		// Draw filtered data
-		g.setColor(new Color(255,0,0));
+		g.setColor(new Color(255,255,255));
 		for (int i = 0; i < lastout.size()-1; i++){
 			g.drawLine((int)(300*lastout.get(i).getX())+300, (int)(600*lastout.get(i).getY()), 
 					(int)(300*lastout.get(i+1).getX())+300, (int)(600*lastout.get(i+1).getY()));
