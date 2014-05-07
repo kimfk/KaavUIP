@@ -223,8 +223,12 @@ public class Gesturizer {
 	}
 
 	public void compare(ArrayList<SimpleVector> sequence) {
+		panel.setBaseList(sequence);
+		
 		// Filter the input sequence 
 		ArrayList<SimpleVector> list = filter(sequence);
+		panel.setResultList(list);
+		
 		double maximumX = Double.NEGATIVE_INFINITY; // rightmost point
 		double minimumX = Double.POSITIVE_INFINITY; // leftmost point
 		double maximumY = Double.NEGATIVE_INFINITY; // topmost point
