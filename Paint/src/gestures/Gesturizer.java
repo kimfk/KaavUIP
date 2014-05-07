@@ -14,6 +14,7 @@ import kaav.main.GAction;
  * 
  */
 public class Gesturizer {
+	private Drawpanel2 panel;
 	private int N;
 	private int sizeK;
 	private double[] K; // kernel function
@@ -337,5 +338,12 @@ public class Gesturizer {
 		
 		teachAction(5, new CreateCircle());
 		System.out.println("Added square to ID #5");
+	}
+	
+	/**
+	 * This is for testing only.
+	 */
+	public void setPanel(Drawpanel2 panel){
+		this.panel = panel;
 	}
 }
