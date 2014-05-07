@@ -18,12 +18,13 @@ import javax.swing.JLabel;
 public class Drawpanel2 extends JFrame implements Runnable {
 	ArrayList<SimpleVector> base;
 	ArrayList<SimpleVector> result;
-	
+	ArrayList<SimpleVector> lastout;
+
 	@Override
 	public void run() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JLabel emptyLabel = new JLabel("");
-		emptyLabel.setPreferredSize(new Dimension(800, 800));
+		JLabel emptyLabel = new JLabel("KAAV: Testing Application");
+		emptyLabel.setPreferredSize(new Dimension(600, 600));
 		this.getContentPane().add(emptyLabel, BorderLayout.CENTER);
 		this.pack();
 		this.setVisible(true);
@@ -33,19 +34,28 @@ public class Drawpanel2 extends JFrame implements Runnable {
 	public void paint(Graphics g) {
 		super.paint(g);
 		if (base == null) return;	
-		
+		if (result == null) return;	
+		if (lastout == null) return;	
+
 		// Draw unfiltered data
 		g.setColor(new Color(0,255,0));
 		for (int i = 0; i < base.size()-1; i++){
-			g.drawLine((int)(300*base.get(i).getX())+400, (int)(300*base.get(i).getY())+400, 
-					(int)(300*base.get(i+1).getX())+400, (int)(300*base.get(i+1).getY())+400);
+			g.drawLine((int)(300*base.get(i).getX())+300, (int)(600*base.get(i).getY()), 
+					(int)(300*base.get(i+1).getX())+300, (int)(600*base.get(i+1).getY()));
 		}
 		
 		// Draw filtered data
 		g.setColor(new Color(255,0,0));
 		for (int i = 0; i < result.size()-1; i++){
-			g.drawLine((int)(300*result.get(i).getX())+400, (int)(300*result.get(i).getY())+400, 
-					(int)(300*result.get(i+1).getX())+400, (int)(300*result.get(i+1).getY())+400);
+			g.drawLine((int)(300*result.get(i).getX())+300, (int)(600*result.get(i).getY()), 
+					(int)(300*result.get(i+1).getX())+300, (int)(600*result.get(i+1).getY()));
+		}
+		
+		// Draw filtered data
+		g.setColor(new Color(255,0,0));
+		for (int i = 0; i < lastout.size()-1; i++){
+			g.drawLine((int)(300*lastout.get(i).getX())+300, (int)(600*lastout.get(i).getY()), 
+					(int)(300*lastout.get(i+1).getX())+300, (int)(600*lastout.get(i+1).getY()));
 		}
 	}
 
@@ -55,5 +65,9 @@ public class Drawpanel2 extends JFrame implements Runnable {
 	
 	public void setResultList(ArrayList<SimpleVector> list) {
 		result = list;
+	}
+	
+	public void setOutList(ArrayList<SimpleVector> list){
+		lastout = list;
 	}
 }

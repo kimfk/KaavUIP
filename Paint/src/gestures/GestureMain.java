@@ -3,6 +3,7 @@ package gestures;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
+
 import actions.*;
 
 /**
@@ -12,7 +13,17 @@ import actions.*;
 public class GestureMain {
 	public static void main(String argv[]){
 		Drawpanel dPanel = new Drawpanel();
-		SwingUtilities.invokeLater(dPanel);
+		//SwingUtilities.invokeLater(dPanel);
+		
+		Drawpanel2 panel2 = new Drawpanel2();
+		SwingUtilities.invokeLater(panel2);		
+		
+		ArrayList<SimpleVector> ol = new ArrayList<SimpleVector>();
+		ol.add(new SimpleVector(-1,1));
+		ol.add(new SimpleVector(1,0));
+		ol.add(new SimpleVector(-1,0));
+		ol.add(new SimpleVector(1,1));
+		panel2.setOutList(ol);
 		
 		Levenshtein l = new Levenshtein();
 		//l.getDistance(new int[]{1, 1, 1}, new int[]{1, 1, 1});
