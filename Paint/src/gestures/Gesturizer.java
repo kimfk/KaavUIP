@@ -20,7 +20,7 @@ public class Gesturizer {
 	private double[] K; // kernel function
 	private double kernelSum; // this is the sum of the kernel function
 	private Levenshtein levenshtein;
-
+	
 	/*
 	 * The following HashMap maps gesture IDs to lists of sequence where each
 	 * sequence is a list of directions to represent a gesture. An ID can have
@@ -298,14 +298,17 @@ public class Gesturizer {
 					// We have found a shorter distance
 					bestDistance = t;
 					bestID = i;
-
-					actionMap.get(bestID).act();
 				}
 			}
 		}
 
-		System.out.println("Best ID: " + bestID + " Shortest Distance: "
-				+ bestDistance);
+		System.out.println("Best ID: " + bestID + " Shortest Distance: "+ bestDistance);
+		if (bestDistance < 2000){
+			actionMap.get(bestID).act();
+		} else{
+			System.err.println("Distance was too long. Gesture rejected.");
+		}
+			
 	}
 	
 	public void configureDefaultSetup(){
@@ -345,15 +348,15 @@ public class Gesturizer {
 		
 		
 		circle = new ArrayList<Integer>();
-		square.add(0);
-		square.add(1);
-		square.add(2);
-		square.add(3);
-		square.add(4);
-		square.add(5);
-		square.add(6);
-		square.add(7);
-		teachSequence(5, square);
+		circle.add(0);
+		circle.add(1);
+		circle.add(2);
+		circle.add(3);
+		circle.add(4);
+		circle.add(5);
+		circle.add(6);
+		circle.add(7);
+		teachSequence(5, circle);
 		
 		teachAction(5, new CreateCircle());
 		System.out.println("Added square to ID #5");
