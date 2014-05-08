@@ -28,6 +28,7 @@ public class GestureMain {
 		double a;
 		double b;
 		double amplitude;
+		
 		for (int i = 0; i < 200; i ++){
 			amplitude = 50+Math.random()*60;			
 			a = Math.cos(((double)i/200)*2*Math.PI) * amplitude;
@@ -35,7 +36,7 @@ public class GestureMain {
 			list.add(new SimpleVector(0+a, 0+b));
 		}
 
-		Gesturizer g = new Gesturizer(400, 110);
+		Gesturizer g = new Gesturizer(100, 50);
 		ArrayList<SimpleVector> result = g.filter(list);
 		ArrayList<Double> kernel = g.getKernel();
 		g.setPanel(panel2);
@@ -54,6 +55,25 @@ public class GestureMain {
 		ArrayList<Integer> input  = new ArrayList<Integer>();
 		ArrayList<Integer> square = new ArrayList<Integer>();
 		ArrayList<Integer> square2 = new ArrayList<Integer>();
+		ArrayList<Integer> streamlineTest  = new ArrayList<Integer>();
+
+		streamlineTest.add(1);
+		streamlineTest.add(1);
+		streamlineTest.add(2);
+		streamlineTest.add(3);
+		streamlineTest.add(4);
+		streamlineTest.add(1);
+		streamlineTest.add(1);
+		streamlineTest.add(5);
+		streamlineTest.add(5);
+		streamlineTest.add(5);
+		streamlineTest.add(4);
+		streamlineTest.add(4);
+		streamlineTest.add(4);
+		streamlineTest.add(4);
+		
+		ArrayList<Integer> out = g.streamlineSafe(streamlineTest, 1);
+		System.out.println(out);
 		
 		input.add(0);
 		input.add(2);
@@ -72,10 +92,10 @@ public class GestureMain {
 		//g.compareAndTrigger(input);	
 		
 		ArrayList<SimpleVector> testList = new ArrayList<SimpleVector>();
-		testList.add(new SimpleVector(-2.0/4,	0.0/4));
-		testList.add(new SimpleVector(-1.0/4,	2.0/4));
-		testList.add(new SimpleVector( 1.0/4,	0.0/4));
-		testList.add(new SimpleVector( 2.0/4,	2.0/4));
+		testList.add(new SimpleVector(1.0/5,	2.5/5));
+		testList.add(new SimpleVector(2.0/5,	4.0/5));
+		testList.add(new SimpleVector(3.0/5,	4.0/5));
+		testList.add(new SimpleVector(4.0/5,	2.5/5));
 		
 		g.compare(testList);
 		

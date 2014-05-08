@@ -228,7 +228,7 @@ public class Gesturizer {
 		// Filter the input sequence 
 		ArrayList<SimpleVector> list = filter(sequence);
 		panel.setResultList(list);
-		
+				
 		ArrayList<SimpleVector> ol = new ArrayList<SimpleVector>();
 		ol.add(new SimpleVector(0,1));
 		ol.add(new SimpleVector(1,0));
@@ -239,7 +239,7 @@ public class Gesturizer {
 		double maximumX = Double.NEGATIVE_INFINITY; // rightmost point
 		double minimumX = Double.POSITIVE_INFINITY; // leftmost point
 		double maximumY = Double.NEGATIVE_INFINITY; // topmost point
-		double minimumY = Double.POSITIVE_INFINITY ; // bottommost point
+		double minimumY = Double.POSITIVE_INFINITY; // bottommost point
 		
 		/*
 		 * Find the leftmost and rightmost extent of
@@ -251,6 +251,14 @@ public class Gesturizer {
 			maximumY = Math.max(v.getY(), maximumX);
 			minimumY = Math.min(v.getY(), minimumY);
 		}
+		
+		System.out.println("-----------------------------------------------");
+		System.out.println("Gesturizes is processing...");
+		System.out.println("Vector list of length: " + sequence.size());
+		System.out.println("Maximum X value: " + maximumX);
+		System.out.println("Minimum X value: " + minimumX);
+		System.out.println("Maximum Y value: " + maximumY);
+		System.out.println("Minimum Y value: " + minimumY);
 		
 		// Vectorize the input list
 		ArrayList<Integer> directions = vectorize(list);
