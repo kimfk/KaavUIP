@@ -112,13 +112,16 @@ public class StraightLine extends JComponent implements Drawable {
     }
  
     private static void createAndShowGUI() {
-        JFrame myFrame = new JFrame();
-        myFrame.setTitle("Kaav");
-        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myFrame.setSize(new Dimension(400, 300));
-        myFrame.setLayout(new BorderLayout());
-        myFrame.add(new StraightLine(), BorderLayout.CENTER);
-        myFrame.setVisible(true);
+       
+        
+        JFrame.setDefaultLookAndFeelDecorated(true);
+	JFrame frame = new JFrame("Kaav");
+	frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        frame.setLayout(new BorderLayout());
+        frame.add(new StraightLine(), BorderLayout.CENTER);
+	frame.setSize(400, 400);
+	frame.setLocationRelativeTo( null );
+	frame.setVisible(true);
     }
 
    /* @Override

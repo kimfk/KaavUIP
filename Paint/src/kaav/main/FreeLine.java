@@ -1,4 +1,5 @@
 package kaav.main;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -20,17 +21,17 @@ public class FreeLine extends JPanel implements MouseListener, MouseMotionListen
     private Point[] arr = new Point[100000];
     
 
-    public FreeLine(String name) {
+    public FreeLine() {
         super();
         index = 0;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        JFrame fr = new JFrame(name);
-        fr.add(this);
-        fr.setSize(500, 500);
-        setBackground(Color.green);
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fr.setVisible(true);
+        //JFrame fr = new JFrame();
+        //fr.add(this);
+        //fr.setSize(500, 500);
+        //setBackground(Color.green);
+        //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //fr.setVisible(true);
 
     }
     public void paintComponent(Graphics g) {
@@ -61,9 +62,21 @@ public class FreeLine extends JPanel implements MouseListener, MouseMotionListen
     public void mouseMoved(MouseEvent e) {}
 
     public static void main(String[] args) {
-        FreeLine draw = new FreeLine("FreeLine");
+        //FreeLine draw = new FreeLine("FreeLine");
+        createAndShowGUI();
     }
-
+    
+    private static void createAndShowGUI() {
+                JFrame.setDefaultLookAndFeelDecorated(true);
+		JFrame frame = new JFrame("Kaav");
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+                frame.setLayout(new BorderLayout());
+                frame.add(new FreeLine(), BorderLayout.CENTER);
+		frame.setSize(400, 400);
+		frame.setLocationRelativeTo( null );
+		frame.setVisible(true);
+    }
+    
     /*@Override
     public void draw() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -88,4 +101,6 @@ public class FreeLine extends JPanel implements MouseListener, MouseMotionListen
     public void translate(float x, float y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
 }

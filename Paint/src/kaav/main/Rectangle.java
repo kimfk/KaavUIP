@@ -14,6 +14,10 @@ import javax.swing.event.*;
  */
 public class Rectangle extends JComponent implements Drawable
 {
+      private ArrayList<ColoredRectangle> coloredRectangles = new ArrayList<ColoredRectangle>();
+      private Point startPoint = null;
+      private Point endPoint = null;
+
 	public static void main(String[] args)
 	{
 		SwingUtilities.invokeLater(new Runnable() {
@@ -25,14 +29,14 @@ public class Rectangle extends JComponent implements Drawable
 
 	private static void createAndShowGUI()
 	{
-		DrawingArea drawingArea = new DrawingArea();
-		ButtonPanel buttonPanel = new ButtonPanel( drawingArea );
+		//DrawingArea drawingArea = new DrawingArea();
+		//ButtonPanel buttonPanel = new ButtonPanel( drawingArea );
 
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		JFrame frame = new JFrame("Draw On Component");
+		JFrame frame = new JFrame("Kaav");
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		frame.getContentPane().add(drawingArea);
-		frame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+                frame.setLayout(new BorderLayout());
+                frame.add(new Rectangle(), BorderLayout.CENTER);
 		frame.setSize(400, 400);
 		frame.setLocationRelativeTo( null );
 		frame.setVisible(true);
@@ -58,7 +62,7 @@ public class Rectangle extends JComponent implements Drawable
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-	static class ButtonPanel extends JPanel implements ActionListener
+	/*static class ButtonPanel extends JPanel implements ActionListener
 	{
 		private DrawingArea drawingArea;
 
@@ -93,16 +97,17 @@ public class Rectangle extends JComponent implements Drawable
 			else
 				drawingArea.setForeground( button.getBackground() );
 		}
-	}
+	}*/
 
-	static class DrawingArea extends JPanel
+	//static class DrawingArea extends JPanel
+        public Rectangle()
 	{
-		private ArrayList<ColoredRectangle> coloredRectangles = new ArrayList<ColoredRectangle>();
-		private Point startPoint = null;
-		private Point endPoint = null;
+		//private ArrayList<ColoredRectangle> coloredRectangles = new ArrayList<ColoredRectangle>();
+		//private Point startPoint = null;
+		//private Point endPoint = null;
 
-		public DrawingArea()
-		{
+		//public DrawingArea()
+		//{
 			setBackground(Color.WHITE);
 
 			MyMouseListener ml = new MyMouseListener();
@@ -121,7 +126,8 @@ public class Rectangle extends JComponent implements Drawable
 			g.setColor( Color.BLACK );
 			g.drawString("Add a rectangle by doing mouse press, drag and release!", 40, 15);
 
-			for (DrawingArea.ColoredRectangle cr : coloredRectangles)
+			//for (DrawingArea.ColoredRectangle cr : coloredRectangles)
+                        for (Rectangle.ColoredRectangle cr : coloredRectangles)
 			{
 				g.setColor( cr.getForeground() );
 				Rectangle r = cr.getRectangle();
@@ -187,7 +193,7 @@ public class Rectangle extends JComponent implements Drawable
 			public void mouseReleased(MouseEvent e)
 			{
 				//  Custom code to save the drawing information to the List
-
+                             /* 
 				int x = Math.min(startPoint.x, endPoint.x);
 				int y = Math.min(startPoint.y, endPoint.y);
 				int width = Math.abs(startPoint.x - endPoint.x);
@@ -199,9 +205,11 @@ public class Rectangle extends JComponent implements Drawable
 				{
 					ColoredRectangle cr = new ColoredRectangle(e.getComponent().getForeground(), r);
 					addRectangle( cr );
+                                        System.out.println("i am iside mouse released");
 				}
 
-				startPoint = null;
+				//startPoint = null;
+                                */
 			}
 		}
 
@@ -232,4 +240,3 @@ public class Rectangle extends JComponent implements Drawable
 			}
 		}
 	}
-}
