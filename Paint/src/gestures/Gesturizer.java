@@ -253,7 +253,7 @@ public class Gesturizer {
 		}
 		
 		System.out.println("-----------------------------------------------");
-		System.out.println("Gesturizes is processing...");
+		System.out.println("Gesturizer is processing...");
 		System.out.println("Vector list of length: " + sequence.size());
 		System.out.println("Maximum X value: " + maximumX);
 		System.out.println("Minimum X value: " + minimumX);
