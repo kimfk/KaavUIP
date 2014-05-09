@@ -173,6 +173,29 @@ public class Gesturizer {
 		return newList;
 	}
 
+	
+	public ArrayList<Integer> streamlineSafeV2(ArrayList<Integer> list, int threshold) {
+		ArrayList<Integer> newList = new ArrayList<Integer>();
+		int current = -1;
+		int count = 0; // Threshold
+		for (int i = 0; i < list.size(); i++) {
+			// If current differs from the active list entry
+			// Change current to active list entry
+			if (current != list.get(i)) {
+				if (count >= threshold && current != -1){
+					for (int it = 0; it < count; it++)
+						newList.add(new Integer(current));
+				}
+				current = list.get(i);
+				count = 0;
+			} else {
+				count++;
+			}
+		}
+		return newList;
+	}
+
+	
 	/**
 	 * Turns a vector array list into a list of integers representing
 	 * directions.
@@ -265,11 +288,11 @@ public class Gesturizer {
 		
 		// Streamline the vector list
 		directions = streamlineRedundant(directions);
+		System.out.println("Processed direction list of length: " + directions.size());
 		compareAndTrigger(directions);
 	}
 
 	public void compareAndTrigger(ArrayList<Integer> list) {
-		
 		int[] input = new int[list.size()];
 		for (int n = 0; n < input.length; n++) {
 			input[n] = list.get(n);
