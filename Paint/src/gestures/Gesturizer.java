@@ -2,6 +2,7 @@ package gestures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import actions.CreateCircle;
 import actions.CreateSquare;
@@ -173,25 +174,36 @@ public class Gesturizer {
 		return newList;
 	}
 
-	
 	public ArrayList<Integer> streamlineSafeV2(ArrayList<Integer> list, int threshold) {
 		ArrayList<Integer> newList = new ArrayList<Integer>();
-		int current = -1;
-		int count = 0; // Threshold
-		for (int i = 0; i < list.size(); i++) {
-			// If current differs from the active list entry
-			// Change current to active list entry
-			if (current != list.get(i)) {
-				if (count >= threshold && current != -1){
-					for (int it = 0; it < count; it++)
-						newList.add(new Integer(current));
-				}
-				current = list.get(i);
-				count = 0;
+		ArrayList<LCounter> countList = new ArrayList<LCounter>();
+		countList.add(new LCounter(-1));
+		
+		for (Integer in : list){
+			if (countList.get(countList.size()-1).getValue() != in){
+				countList.add(new LCounter(in));
 			} else {
-				count++;
+				countList.get(countList.size()-1).increment();
 			}
 		}
+		
+		Iterator<LCounter> iter = countList.iterator();
+		
+		while (iter.hasNext()){
+			if (iter.next().getCount() < threshold)
+				iter.remove();
+		}
+
+		int oldval = -2;
+		for (LCounter l : countList){
+			if (oldval != l.getValue()){
+				oldval = l.getValue();
+				newList.add(oldval);
+			}
+		}
+		
+
+		
 		return newList;
 	}
 

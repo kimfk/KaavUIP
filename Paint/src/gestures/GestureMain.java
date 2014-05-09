@@ -72,7 +72,7 @@ public class GestureMain {
 		streamlineTest.add(4);
 		streamlineTest.add(4);
 		
-		ArrayList<Integer> out = g.streamlineSafeV2(streamlineTest, 1);
+		ArrayList<Integer> out = g.streamlineSafeV2(streamlineTest, 2);
 		System.out.println(out);
 		
 		input.add(0);
