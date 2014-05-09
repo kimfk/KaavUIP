@@ -5,21 +5,23 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 
-//import org.neuroph.core.NeuralNetwork;
-//import org.neuroph.core.data.DataSet;
-//import org.neuroph.core.learning.LearningRule;
+
+
+import actions.*;
 
 
 /**
  * This is a main class for testing the gesturizer
  * @author Ganryu
- *
  */
 
 public class GestureMain {
 	public static void main(String argv[]){
 		Drawpanel dPanel = new Drawpanel();
-		SwingUtilities.invokeLater(dPanel);
+		//SwingUtilities.invokeLater(dPanel);
+		
+		Drawpanel2 panel2 = new Drawpanel2();
+		SwingUtilities.invokeLater(panel2);		
 		
 		Levenshtein l = new Levenshtein();
 		//l.getDistance(new int[]{1, 1, 1}, new int[]{1, 1, 1});
@@ -31,6 +33,7 @@ public class GestureMain {
 		double a;
 		double b;
 		double amplitude;
+		
 		for (int i = 0; i < 200; i ++){
 			amplitude = 50+Math.random()*60;			
 			a = Math.cos(((double)i/200)*2*Math.PI) * amplitude;
@@ -38,9 +41,10 @@ public class GestureMain {
 			list.add(new SimpleVector(0+a, 0+b));
 		}
 
-		Gesturizer g = new Gesturizer(400, 110);
+		Gesturizer g = new Gesturizer(100, 50);
 		ArrayList<SimpleVector> result = g.filter(list);
 		ArrayList<Double> kernel = g.getKernel();
+		g.setPanel(panel2);
 		
 		for (int i = 0; i < 60; i ++){
 			SimpleVector v = new SimpleVector(
@@ -49,8 +53,6 @@ public class GestureMain {
 			System.out.println(v.getDirection());
 		}
 		
-		//g.printK();
-		
 		dPanel.setBaseList(list);
 		dPanel.setResultList(result);
 		dPanel.setKernel(kernel);
@@ -58,6 +60,25 @@ public class GestureMain {
 		ArrayList<Integer> input  = new ArrayList<Integer>();
 		ArrayList<Integer> square = new ArrayList<Integer>();
 		ArrayList<Integer> square2 = new ArrayList<Integer>();
+		ArrayList<Integer> streamlineTest  = new ArrayList<Integer>();
+
+		streamlineTest.add(1);
+		streamlineTest.add(1);
+		streamlineTest.add(2);
+		streamlineTest.add(3);
+		streamlineTest.add(4);
+		streamlineTest.add(1);
+		streamlineTest.add(1);
+		streamlineTest.add(5);
+		streamlineTest.add(5);
+		streamlineTest.add(5);
+		streamlineTest.add(4);
+		streamlineTest.add(4);
+		streamlineTest.add(4);
+		streamlineTest.add(4);
+		
+		ArrayList<Integer> out = g.streamlineSafeV2(streamlineTest, 2);
+		System.out.println(out);
 		
 		input.add(0);
 		input.add(2);
@@ -72,8 +93,34 @@ public class GestureMain {
 		square2.add(2);
 
 		g.teachSequence(5, square);
-		g.teachSequence(5, square2);
-		g.compareAndTrigger(input);		
+		g.teachAction(5, new CreateCircle());
+		//g.compareAndTrigger(input);	
+		
+		ArrayList<SimpleVector> testList = new ArrayList<SimpleVector>();
+		testList.add(new SimpleVector(1.0/5,	2.5/5));
+		testList.add(new SimpleVector(2.0/5,	4.0/5));
+		testList.add(new SimpleVector(3.0/5,	4.0/5));
+		testList.add(new SimpleVector(4.0/5,	2.5/5));
+		
+		g.compare(testList);
+		
+		SimpleVector d1 = new SimpleVector(1,0);
+		SimpleVector d2 = new SimpleVector(1,1);
+		SimpleVector d3 = new SimpleVector(0,1);
+		SimpleVector d4 = new SimpleVector(-1,1);
+		SimpleVector d5 = new SimpleVector(-1,0);
+		SimpleVector d6 = new SimpleVector(-1,-1);
+		SimpleVector d7 = new SimpleVector(0,-1);
+		SimpleVector d8 = new SimpleVector(1,-1);
+		System.out.println("--------------------");
+		System.out.println(d1.getDirection());
+		System.out.println(d2.getDirection());
+		System.out.println(d3.getDirection());
+		System.out.println(d4.getDirection());
+		System.out.println(d5.getDirection());
+		System.out.println(d6.getDirection());
+		System.out.println(d7.getDirection());
+		System.out.println(d8.getDirection());
+		System.out.println("TEST END");
 	}
 }
-

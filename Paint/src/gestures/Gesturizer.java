@@ -3,10 +3,9 @@ package gestures;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
-import javax.swing.AbstractAction;
-
+import actions.CreateCircle;
+import actions.CreateSquare;
 import kaav.main.GAction;
 
 /**
@@ -16,12 +15,13 @@ import kaav.main.GAction;
  * 
  */
 public class Gesturizer {
+	private Drawpanel2 panel;
 	private int N;
 	private int sizeK;
 	private double[] K; // kernel function
 	private double kernelSum; // this is the sum of the kernel function
 	private Levenshtein levenshtein;
-
+	
 	/*
 	 * The following HashMap maps gesture IDs to lists of sequence where each
 	 * sequence is a list of directions to represent a gesture. An ID can have
@@ -44,6 +44,7 @@ public class Gesturizer {
 	public Gesturizer(int N, int m) {
 		levenshtein = new Levenshtein();
 		sequenceMap = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
+		actionMap = new HashMap<Integer, GAction>();
 		usedIDs = new ArrayList<Integer>();
 
 		/**
@@ -173,6 +174,40 @@ public class Gesturizer {
 		return newList;
 	}
 
+	public ArrayList<Integer> streamlineSafeV2(ArrayList<Integer> list, int threshold) {
+		ArrayList<Integer> newList = new ArrayList<Integer>();
+		ArrayList<LCounter> countList = new ArrayList<LCounter>();
+		countList.add(new LCounter(-1));
+		
+		for (Integer in : list){
+			if (countList.get(countList.size()-1).getValue() != in){
+				countList.add(new LCounter(in));
+			} else {
+				countList.get(countList.size()-1).increment();
+			}
+		}
+		
+		Iterator<LCounter> iter = countList.iterator();
+		
+		while (iter.hasNext()){
+			if (iter.next().getCount() < threshold)
+				iter.remove();
+		}
+
+		int oldval = -2;
+		for (LCounter l : countList){
+			if (oldval != l.getValue()){
+				oldval = l.getValue();
+				newList.add(oldval);
+			}
+		}
+		
+
+		
+		return newList;
+	}
+
+	
 	/**
 	 * Turns a vector array list into a list of integers representing
 	 * directions.
@@ -182,13 +217,13 @@ public class Gesturizer {
 	 */
 	public ArrayList<Integer> vectorize(ArrayList<SimpleVector> list) {
 		ArrayList<Integer> outList = new ArrayList<Integer>();
-
+		
 		for (int i = 0; i < list.size() - 1; i++) {
 			outList.add(SimpleVector.subtract(list.get(i + 1), list.get(i))
 					.getDirection());
 		}
 
-		return streamlineRedundant(outList);
+		return outList;
 	}
 
 	/**
@@ -223,9 +258,49 @@ public class Gesturizer {
 	}
 
 	public void compare(ArrayList<SimpleVector> sequence) {
+		panel.setBaseList(sequence);
+		
+		// Filter the input sequence 
 		ArrayList<SimpleVector> list = filter(sequence);
+		panel.setResultList(list);
+				
+		ArrayList<SimpleVector> ol = new ArrayList<SimpleVector>();
+		ol.add(new SimpleVector(0,1));
+		ol.add(new SimpleVector(1,0));
+		ol.add(new SimpleVector(0,0));
+		ol.add(new SimpleVector(1,1));
+		panel.setOutList(ol);
+		
+		double maximumX = Double.NEGATIVE_INFINITY; // rightmost point
+		double minimumX = Double.POSITIVE_INFINITY; // leftmost point
+		double maximumY = Double.NEGATIVE_INFINITY; // topmost point
+		double minimumY = Double.POSITIVE_INFINITY; // bottommost point
+		
+		/*
+		 * Find the leftmost and rightmost extent of
+		 * the filtered sequence.
+		 */
+		for (SimpleVector v : sequence){
+			maximumX = Math.max(v.getX(), maximumX);
+			minimumX = Math.min(v.getX(), minimumX);
+			maximumY = Math.max(v.getY(), maximumX);
+			minimumY = Math.min(v.getY(), minimumY);
+		}
+		
+		System.out.println("-----------------------------------------------");
+		System.out.println("Gesturizer is processing...");
+		System.out.println("Vector list of length: " + sequence.size());
+		System.out.println("Maximum X value: " + maximumX);
+		System.out.println("Minimum X value: " + minimumX);
+		System.out.println("Maximum Y value: " + maximumY);
+		System.out.println("Minimum Y value: " + minimumY);
+		
+		// Vectorize the input list
 		ArrayList<Integer> directions = vectorize(list);
+		
+		// Streamline the vector list
 		directions = streamlineRedundant(directions);
+		System.out.println("Processed direction list of length: " + directions.size());
 		compareAndTrigger(directions);
 	}
 
@@ -258,13 +333,74 @@ public class Gesturizer {
 					// We have found a shorter distance
 					bestDistance = t;
 					bestID = i;
-
-					actionMap.get(bestID).act();
 				}
 			}
 		}
 
-		System.out.println("Best ID: " + bestID + " Shortest Distance: "
-				+ bestDistance);
+		System.out.println("Best ID: " + bestID + " Shortest Distance: "+ bestDistance);
+		if (bestDistance < 2000){
+			actionMap.get(bestID).act();
+		} else{
+			System.err.println("Distance was too long. Gesture rejected.");
+		}
+			
+	}
+	
+	public void configureDefaultSetup(){
+		ArrayList<Integer> square;
+		ArrayList<Integer> circle;
+		
+		square = new ArrayList<Integer>();
+		square.add(0);
+		square.add(2);
+		square.add(4);
+		square.add(6);
+		teachSequence(4, square);
+		
+		square = new ArrayList<Integer>();
+		square.add(2);
+		square.add(4);
+		square.add(6);
+		square.add(0);
+		teachSequence(4, square);
+		
+		square = new ArrayList<Integer>();
+		square.add(4);
+		square.add(6);
+		square.add(0);
+		square.add(2);
+		teachSequence(4, square);
+
+		square = new ArrayList<Integer>();
+		square.add(6);
+		square.add(0);
+		square.add(2);
+		square.add(4);
+		teachSequence(4, square);
+		
+		teachAction(4, new CreateSquare());
+		System.out.println("Added square to ID #4");
+		
+		
+		circle = new ArrayList<Integer>();
+		circle.add(0);
+		circle.add(1);
+		circle.add(2);
+		circle.add(3);
+		circle.add(4);
+		circle.add(5);
+		circle.add(6);
+		circle.add(7);
+		teachSequence(5, circle);
+		
+		teachAction(5, new CreateCircle());
+		System.out.println("Added square to ID #5");
+	}
+	
+	/**
+	 * This is for testing only.
+	 */
+	public void setPanel(Drawpanel2 panel){
+		this.panel = panel;
 	}
 }

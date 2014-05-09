@@ -4,16 +4,16 @@ public class Levenshtein {
 	/**
 	 * Return the levenshtein distance between the integers in the arrays
 	 * 
-	 * @param a
-	 * @param b
+	 * @param arrayA
+	 * @param arrayB
 	 */
-	public int getDistance(int[] a, int[] b) {
-		int[][] array = new int[a.length][b.length];
+	public int getDistance(int[] arrayA, int[] arrayB) {
+		int[][] array = new int[arrayA.length][arrayB.length];
 
-		for (int i = 0; i < a.length; i++)
+		for (int i = 0; i < arrayA.length; i++)
 			array[i][0] = i;
 
-		for (int i = 0; i < b.length; i++)
+		for (int i = 0; i < arrayB.length; i++)
 			array[0][i] = i;
 
 		int x;
@@ -25,9 +25,9 @@ public class Levenshtein {
 		 * Build an array to represent the problem as a matrix rather than
 		 * having to use recursion.
 		 */
-		for (int j = 1; j < b.length; j++) {
-			for (int i = 1; i < a.length; i++) {
-				if (a[i] == b[j]) {
+		for (int j = 1; j < arrayB.length; j++) {
+			for (int i = 1; i < arrayA.length; i++) {
+				if (arrayA[i] == arrayB[j]) {
 					array[i][j] = array[i - 1][j - 1];
 				} else {
 					x = array[i - 1][j] + 1;
@@ -40,12 +40,13 @@ public class Levenshtein {
 			}
 		}
 
-		for (int j = 0; j < b.length; j++) {
-			for (int i = 0; i < a.length; i++)
+		for (int j = 0; j < arrayB.length; j++) {
+			for (int i = 0; i < arrayA.length; i++)
 				System.out.print(array[i][j] + " ");
 			System.out.println();
 		}
-
-		return array[a.length - 1][b.length - 1];
+		System.out.println("Distance Found: " + array[arrayA.length - 1][arrayB.length - 1]);
+		
+		return array[arrayA.length - 1][arrayB.length - 1];
 	}
 }
