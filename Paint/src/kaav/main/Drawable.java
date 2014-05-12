@@ -1,4 +1,7 @@
 package kaav.main;
+
+import java.awt.Graphics;
+
 /**
  * This interface must be implemented by all geometric objects to be stored in
  * the container and by all geometric objects to be drawn on screen.
@@ -13,7 +16,7 @@ public interface Drawable {
 	/**
 	 * Draw the object on screen.
 	 */
-	void draw();
+	void draw(Graphics g);
 	
 	/**
 	 * Scale by some factor

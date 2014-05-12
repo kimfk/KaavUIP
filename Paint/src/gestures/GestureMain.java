@@ -45,14 +45,14 @@ public class GestureMain {
 		ArrayList<SimpleVector> result = g.filter(list);
 		ArrayList<Double> kernel = g.getKernel();
 		g.setPanel(panel2);
-		
+
 		for (int i = 0; i < 60; i ++){
 			SimpleVector v = new SimpleVector(
 					Math.cos(((double)i)/20 * 2 * Math.PI),
 					Math.sin(((double)i)/20 * 2 * Math.PI));
 			System.out.println(v.getDirection());
 		}
-		
+
 		dPanel.setBaseList(list);
 		dPanel.setResultList(result);
 		dPanel.setKernel(kernel);
