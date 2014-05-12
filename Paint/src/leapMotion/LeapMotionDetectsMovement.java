@@ -75,9 +75,11 @@ class LeapMotionDetectsMovement extends Listener {
 		    	
 	    	//amount fingers = 2 --> replacing
 	    	else if(amount_fingers == 2 && position1.getZ() < 0 && position2.getZ() <0){
+	    		coordinateslist.clear();
 	    		System.out.println("Drag item to new position: " +frame.fingers().get(0).tipPosition());
-	        	//send new coordinates to andreas 
-	        	//coordinateslist.clear();		
+	    		temporary = frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition());
+	    		// send (new SimpleVector(temporary.getX(), temporary.getY()));) to andreas
+	        	//send new coordinates to andreas 		
 	    	}
         	
         	}	
