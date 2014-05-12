@@ -305,6 +305,11 @@ public class Gesturizer {
 	}
 
 	public void compareAndTrigger(ArrayList<Integer> list) {
+		if (list.size() < 4){
+			System.err.println("LIST TOO SHORT. REJECTING SEARCH");
+			return;
+		}
+		
 		int[] input = new int[list.size()];
 		for (int n = 0; n < input.length; n++) {
 			input[n] = list.get(n);
@@ -313,7 +318,7 @@ public class Gesturizer {
 		int bestID = -1; // Stores the best ID we found so far
 		int bestDistance = Integer.MAX_VALUE;
 		int t; // temporary int
-
+		
 		ArrayList<ArrayList<Integer>> sequences;
 		// Look at each used ID
 		for (Integer i : usedIDs) {
