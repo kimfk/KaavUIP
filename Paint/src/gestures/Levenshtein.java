@@ -40,11 +40,11 @@ public class Levenshtein {
 			}
 		}
 
-		for (int j = 0; j < arrayB.length; j++) {
+		/*for (int j = 0; j < arrayB.length; j++) {
 			for (int i = 0; i < arrayA.length; i++)
 				System.out.print(array[i][j] + " ");
 			System.out.println();
-		}
+		}*/
 		System.out.println("Distance Found: " + array[arrayA.length - 1][arrayB.length - 1]);
 		
 		return array[arrayA.length - 1][arrayB.length - 1];

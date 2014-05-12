@@ -22,12 +22,6 @@ public interface Drawable {
 	void scale(float factor);
 	
 	/**
-	 * Rotate by radians
-	 * @param radians
-	 */
-	void rotate(float radians);
-	
-	/**
 	 * Translate by some coordinates x and y.
 	 * @param x
 	 * @param y
