@@ -1,16 +1,25 @@
 package kaav.main;
-/**
- * This class is for testing matrix code
- * @author Ganryu
- */
 
-public class AndreasTest {
+import gestures.Gesturizer;
+
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
+import javax.swing.SwingUtilities;
+
+public class AndreasTest implements Runnable {
+	static GraphicsDevice device = GraphicsEnvironment
+	        .getLocalGraphicsEnvironment().getScreenDevices()[0];
+	
 	public static void main(String[] args) {
-		Matrix3 mat1 = new Matrix3();
-		Matrix3 mat2 = new Matrix3();
-		Matrix3 mat3 = new Matrix3(1,2,3,4,5,6,7,8,9);
-				
-		Matrix3 mat4 = Matrix3.multiply(mat3, mat1);
-		mat4.print();
+        SwingUtilities.invokeLater(new AndreasTest());
+	}
+
+	@Override
+	public void run() {
+		Gesturizer gesturizer = new Gesturizer(400, 110);
+		GeometryContainer container = new GeometryContainer();
+		RenderingEngine renderer = new RenderingEngine(container);
+        device.setFullScreenWindow(renderer);
 	}
 }

@@ -16,7 +16,7 @@ public interface Drawable {
 	/**
 	 * Draw the object on screen.
 	 */
-	void draw(Graphics g);
+	void draw(Graphics g, double width, double height);
 	
 	/**
 	 * Scale by some factor

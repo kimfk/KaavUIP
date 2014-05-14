@@ -1,7 +1,11 @@
 package kaav.main;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -9,15 +13,22 @@ import javax.swing.JPanel;
  * @author Ganryu
  *
  */
-public class RenderingEngine extends JPanel{
+public class RenderingEngine extends JFrame {
 	private GeometryContainer container;	
-	
+	private double width;
+	private double height;
+
 	/**
 	 * Creates a new RenderingEngine with the given GeometryContainer. 
 	 * @param container
 	 */
 	public RenderingEngine(GeometryContainer container){
 		this.container = container;
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		width = screenSize.getWidth();
+		height = screenSize.getHeight();
+		System.out.println("Width: " + width);
+		System.out.println("Height: " + height);
 	}
 	
 	/**
@@ -25,10 +36,12 @@ public class RenderingEngine extends JPanel{
 	 */
 	@Override
 	public void paint(Graphics g) {
-		super.paint(g);
-		ArrayList<Drawable> drawables = container.getDrawables();
-		for (Drawable d: drawables){
-			d.draw(g);
+		g.setColor(new Color(0,0,0));
+		g.fillRect(0, 0, (int)width, (int)height);
+		
+		g.setColor(new Color(90,90,0));
+		for (Drawable d : container.getDrawables()){
+			d.draw(g, width, height);
 		}
 	}
 }
