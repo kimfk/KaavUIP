@@ -18,7 +18,7 @@ public class Rectangle extends JComponent implements Drawable
       private Point startPoint = null;
       private Point endPoint = null;
 
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -40,10 +40,9 @@ public class Rectangle extends JComponent implements Drawable
 		frame.setSize(400, 400);
 		frame.setLocationRelativeTo( null );
 		frame.setVisible(true);
-	}
+	}*/
 
-    @Override
-    public void draw() {
+        public void draw() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -52,10 +51,7 @@ public class Rectangle extends JComponent implements Drawable
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void rotate(float radians) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public void translate(float x, float y) {
@@ -159,6 +155,11 @@ public class Rectangle extends JComponent implements Drawable
 			coloredRectangles.clear();
 			repaint();
 		}
+
+    @Override
+    public void draw(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 		class MyMouseListener extends MouseInputAdapter
 		{
