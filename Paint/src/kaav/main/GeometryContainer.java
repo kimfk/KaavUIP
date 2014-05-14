@@ -12,9 +12,7 @@ import javax.swing.JPanel;
 
 /**
  * Geometry container class for storing drawable objects
- * 
  * @author Ganryu
- * 
  */
 public class GeometryContainer {
 	private ArrayList<Drawable> drawables;

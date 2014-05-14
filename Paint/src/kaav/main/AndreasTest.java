@@ -5,6 +5,7 @@ import gestures.Gesturizer;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class AndreasTest implements Runnable {
@@ -20,6 +21,9 @@ public class AndreasTest implements Runnable {
 		Gesturizer gesturizer = new Gesturizer(400, 110);
 		GeometryContainer container = new GeometryContainer();
 		RenderingEngine renderer = new RenderingEngine(container);
+		
+		renderer.setUndecorated(true);
+		renderer.setExtendedState(JFrame.MAXIMIZED_BOTH);
         device.setFullScreenWindow(renderer);
 	}
 }
