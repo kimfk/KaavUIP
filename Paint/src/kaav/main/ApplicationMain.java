@@ -1,14 +1,14 @@
 package kaav.main;
 
-import  paintApplication.*;
+//import  paintApplication.*;
 
 public class ApplicationMain {
 
-      public static PaintApplication paint; 
+     // public static PaintApplication paint; 
        
 	public static void main(String[] args) {
 
-           paint = new PaintApplication();
+           //paint = new PaintApplication();
            
          
             
