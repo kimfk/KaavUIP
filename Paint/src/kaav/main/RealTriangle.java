@@ -4,6 +4,7 @@
  */
 package kaav.main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -16,22 +17,36 @@ public class RealTriangle implements Drawable{
      int tWidth;            //width - the width of the rectangle to be drawn.
      int tHeight;           //height - the height of the rectangle to be drawn.
       
-     int[] xPoints = {x , tWidth, tHeight}; //refelct x dragged and y
-     int[] yPoints = {y, tHeight, tWidth}; //refelct x dragged and y
+     //int[] xPoints = {x , tWidth, tHeight}; //refelct x dragged and y
+     //int[] yPoints = {y, tHeight, tWidth}; //refelct x dragged and y
             
-                               
+      int[] xPoints ;
+      int[] yPoints ;
 				
     
+    
+    
     public RealTriangle(int x, int y, int w, int h){
+        
 		this.x = x;
 		this.y = y;
                 this.tWidth = w;
 		this.tHeight = h;
+                
+                this.xPoints = new int[]{x, w, h};
+                this.yPoints = new int[]{y, h, w};
+                
+                
 	}
     
+    
+                
     @Override
     public void draw(Graphics g, double width, double height) {
+           
+           g.setColor( Color.RED );
            g.drawPolygon(xPoints,yPoints,3);
+          
     }
 
     @Override

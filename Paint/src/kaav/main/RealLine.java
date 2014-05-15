@@ -4,6 +4,7 @@
  */
 package kaav.main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -29,6 +30,7 @@ public class RealLine  implements Drawable{
     
     @Override
     public void draw(Graphics g, double width, double height) {
+           g.setColor( Color.GREEN );
            g.drawLine(x1, y1,x2,y2);
     }
 

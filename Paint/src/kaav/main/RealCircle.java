@@ -1,5 +1,6 @@
 package kaav.main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class RealCircle implements Drawable{
@@ -15,6 +16,7 @@ public class RealCircle implements Drawable{
 	
 	@Override
 	public void draw(Graphics g, double width, double height) {
+                g.setColor( Color.BLUE);
 		g.drawOval(x-radius/2, y-radius/2, radius, radius);
 	}
 
