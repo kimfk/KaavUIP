@@ -1,14 +1,9 @@
 package kaav.main;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Stack;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Geometry container class for storing drawable objects
@@ -23,10 +18,14 @@ public class GeometryContainer {
 	 */
 	public GeometryContainer() {
 		drawables = new ArrayList<Drawable>();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
+		
 		drawables.add(new RealCircle(0,0,30));
-		drawables.add(new RealCircle(1920,0,30));
-		drawables.add(new RealCircle(0,1200,30));
-		drawables.add(new RealCircle(1920,1200,30));
+		drawables.add(new RealCircle((int)width,0,30));
+		drawables.add(new RealCircle(0,(int)height,30));
+		drawables.add(new RealCircle((int)width,(int)height,30));
 	}
 
 	/**
