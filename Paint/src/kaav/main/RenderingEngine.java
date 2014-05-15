@@ -36,8 +36,8 @@ public class RenderingEngine extends JFrame {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(new Color(100,100,100));
-		g.fillRect(0, 0, (int)width, (int)height);
+		//g.setColor(new Color(100,100,100));
+		//g.fillRect(0, 0, (int)width, (int)height);
 		
 		g.setColor(new Color(255,255,0));
 		for (Drawable d : container.getDrawables()){
