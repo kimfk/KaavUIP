@@ -1,12 +1,13 @@
 package leapMotion;
 /******************************************************************************\
 * Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
+
 * Leap Motion proprietary and confidential. Not for distribution.              *
 * Use subject to the terms of the Leap Motion SDK Agreement available at       *
 * https://developer.leapmotion.com/sdk_agreement, or another agreement         *
 * between Leap Motion and you, your company or other organization.             *
 \******************************************************************************/
-//THIS ONE WORKSSS!!!!
+
 import gestures.Gesturizer;
 import gestures.SimpleVector;
 
@@ -16,31 +17,41 @@ import java.util.ArrayList;
 
 import com.leapmotion.leap.*;
 import com.leapmotion.leap.Gesture.State;
-
+/**
+ * This detects movement in the leap motion, makes list of coordinates 
+ * and send this to the gesturerecognition
+ * @author Kim Feenstra Kuiper
+ *
+ */
 class LeapMotionDetectsMovement extends Listener {
 
-    public ArrayList<SimpleVector> coordinateslist = new ArrayList<SimpleVector>();
-    public Gesturizer gesturizer;
+    public ArrayList<SimpleVector> coordinateslist = new ArrayList<SimpleVector>();	//Will save all the usefull coordinates
+    public Gesturizer gesturizer;	
     
+    //Start the Leap Motion
 	public LeapMotionDetectsMovement(Gesturizer gesturizer) {
 		this.gesturizer = gesturizer;
 	    gesturizer.configureDefaultSetup();
 	    
 	}
 
+	//Initialize the controller (Leap Motion)
 	public void onInit(Controller controller) {
         System.out.println("Initialized");
     }
 
+	//Check if the Leap Motion is connected
     public void onConnect(Controller controller) {
         System.out.println("Connected");
     }
 
+    //When disconnected
     public void onDisconnect(Controller controller) {
         //Note: not dispatched when running in a debugger.
         System.out.println("Disconnected");
     }
 
+    //When excited
     public void onExit(Controller controller) {
         System.out.println("Exited");
     }
@@ -49,16 +60,19 @@ class LeapMotionDetectsMovement extends Listener {
         // Get the most recent frame and report some basic information
         Frame frame = controller.frame();
         
-        int amount_hands = frame.hands().count();
-        int simplevectorx, simplevectory;
-        Vector temporary;
+        int amount_hands = frame.hands().count(); //count the amount of hands
+        int simplevectorx, simplevectory;	//temporary int's to save simplevectors.
+        Vector temporary;		//Temporaty vector which will be translated and replaced
         
+        //If there is 1 hand
         if (amount_hands == 1){
-        	int amount_fingers = frame.fingers().count();
-        	Vector position1 =  frame.fingers().get(0).tipPosition();
-        	Vector position2 =  frame.fingers().get(1).tipPosition();
+        	int amount_fingers = frame.fingers().count();				//Count fingers
+        	Vector position1 =  frame.fingers().get(0).tipPosition();	//position fingertip 1
+        	Vector position2 =  frame.fingers().get(1).tipPosition();	//position fingertip 2 (if he's not there it will ne (0,0,0)
+        	//If there fingers detected
         	if (amount_fingers > 0){
-		    	//Amount fingers = 1 --> Free drawing
+		    	//Amount fingers = 1, and you are in the -x area (to the screen), the positions will be saved to the coordinates
+        		//list, When you bring this finger in the +x area (from the screen) the list wil be sended to gesture. 
 		    	if(amount_fingers == 1){
 		    		if(position1.getZ() < 0) {
 		    		temporary = frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition());
@@ -73,7 +87,8 @@ class LeapMotionDetectsMovement extends Listener {
 		    	} 		
 		    }
 		    	
-	    	//amount fingers = 2 --> replacing
+		    	//Amount fingers = 2, and you are (with both fingers) in the -x area (to the screen), the positions will 
+        		//Be sended to .... to replace the picture
 	    	else if(amount_fingers == 2 && position1.getZ() < 0 && position2.getZ() <0){
 	    		coordinateslist.clear();
 	    		System.out.println("Drag item to new position: " +frame.fingers().get(0).tipPosition());
@@ -85,6 +100,7 @@ class LeapMotionDetectsMovement extends Listener {
         	}	
         }
         
+        //If two hands are shown, the figure will be glued to his spot, it is now set. 
         if (amount_hands ==2){
         	System.out.println("The figure is now placed");
         	coordinateslist.clear();
