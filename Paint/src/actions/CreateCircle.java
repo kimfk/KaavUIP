@@ -1,11 +1,20 @@
 package actions;
 
+import backup.DataPackage;
 import kaav.main.GAction;
 
 public class CreateCircle implements GAction{
 	@Override
-	public void act() {
-		// TODO call methods here
-		System.out.println("A circle has been detected!");
+	/**
+	 * This method is called by the gesturizer when the appropriate gesture has
+	 * been input into the system.
+	 */
+	@Override
+	public void act(DataPackage data) {
+		float x = (float)(data.maximumX+data.minimumX) / 2.0f;
+		float y = (float)(data.maximumY+data.minimumY) / 2.0f;
+		float a = 100;
+		
+		cont.createCircle(x, y, a);
 	}
 }
