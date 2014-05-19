@@ -287,6 +287,8 @@ public class Gesturizer {
 			minimumY = Math.min(v.getY(), minimumY);
 		}
 		
+		DataPackage pack = new DataPackage(maximumX, minimumX, maximumY, minimumY);
+		
 		System.out.println("-----------------------------------------------");
 		System.out.println("Gesturizer is processing...");
 		System.out.println("Vector list of length: " + sequence.size());
@@ -301,10 +303,10 @@ public class Gesturizer {
 		// Streamline the vector list
 		directions = streamlineRedundant(directions);
 		System.out.println("Processed direction list of length: " + directions.size());
-		compareAndTrigger(directions);
+		compareAndTrigger(directions, pack);
 	}
 
-	public void compareAndTrigger(ArrayList<Integer> list) {
+	public void compareAndTrigger(ArrayList<Integer> list, DataPackage p) {
 		if (list.size() < 4){
 			System.err.println("LIST TOO SHORT. REJECTING SEARCH");
 			return;
@@ -344,7 +346,7 @@ public class Gesturizer {
 
 		System.out.println("Best ID: " + bestID + " Shortest Distance: "+ bestDistance);
 		if (bestDistance < 2000){
-			actionMap.get(bestID).act();
+			actionMap.get(bestID).act(p);
 		} else{
 			System.err.println("Distance was too long. Gesture rejected.");
 		}
