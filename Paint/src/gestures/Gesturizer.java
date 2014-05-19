@@ -7,6 +7,7 @@ import java.util.Iterator;
 import actions.CreateCircle;
 import actions.CreateSquare;
 import kaav.main.GAction;
+import kaav.main.GeometryContainer;
 
 /**
  * Class to recognize gestures
@@ -353,9 +354,13 @@ public class Gesturizer {
 			
 	}
 	
-	public void configureDefaultSetup(){
+	/**
+	 * This method sets up the default configuration of the Gesturizer.
+	 */
+	public void configureDefaultSetup(GeometryContainer container){
 		ArrayList<Integer> square;
 		ArrayList<Integer> circle;
+		ArrayList<Integer> triangle;
 		
 		square = new ArrayList<Integer>();
 		square.add(0);
@@ -400,7 +405,7 @@ public class Gesturizer {
 		circle.add(7);
 		teachSequence(5, circle);
 		
-		teachAction(5, new CreateCircle());
+		teachAction(5, new CreateCircle(container));
 		System.out.println("Added square to ID #5");
 	}
 	
