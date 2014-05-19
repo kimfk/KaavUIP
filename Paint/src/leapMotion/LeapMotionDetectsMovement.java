@@ -23,7 +23,7 @@ import com.leapmotion.leap.Gesture.State;
  * @author Kim Feenstra Kuiper
  *
  */
-class LeapMotionDetectsMovement extends Listener {
+public class LeapMotionDetectsMovement extends Listener {
 
     public ArrayList<SimpleVector> coordinateslist = new ArrayList<SimpleVector>();	//Will save all the usefull coordinates
     public Gesturizer gesturizer;	
@@ -31,7 +31,7 @@ class LeapMotionDetectsMovement extends Listener {
     //Start the Leap Motion
 	public LeapMotionDetectsMovement(Gesturizer gesturizer) {
 		this.gesturizer = gesturizer;
-	    gesturizer.configureDefaultSetup();
+	    
 	    
 	}
 

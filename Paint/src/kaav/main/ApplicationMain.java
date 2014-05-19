@@ -12,6 +12,8 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import com.leapmotion.leap.Controller;
+
 import leapMotion.LeapMotionDetectsMovement;
 
 public class ApplicationMain implements Runnable {
@@ -34,7 +36,7 @@ public class ApplicationMain implements Runnable {
 		renderer.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		device.setFullScreenWindow(renderer);
 
-		LeapMotionDetectsMovement listener = new LeapMotionDetectsMovement(
+		leapMotion.LeapMotionDetectsMovement listener = new leapMotion.LeapMotionDetectsMovement(
 				gesturizer);
 		Controller controller = new Controller();
 
