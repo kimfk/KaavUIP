@@ -12,7 +12,7 @@ public class CreateCircle implements GAction{
 	 * 
 	 * @param container
 	 */
-	public void CreateCircle(GeometryContainer container) {
+	public CreateCircle(GeometryContainer container) {
 		cont = container;
 	}
 

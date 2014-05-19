@@ -360,6 +360,7 @@ public class Gesturizer {
 	public void configureDefaultSetup(GeometryContainer container){
 		ArrayList<Integer> square;
 		ArrayList<Integer> circle;
+		ArrayList<Integer> triangle;
 		
 		square = new ArrayList<Integer>();
 		square.add(0);
@@ -404,7 +405,7 @@ public class Gesturizer {
 		circle.add(7);
 		teachSequence(5, circle);
 		
-		teachAction(5, new CreateCircle());
+		teachAction(5, new CreateCircle(container));
 		System.out.println("Added square to ID #5");
 	}
 	
