@@ -13,7 +13,7 @@ public class CreateTriangle implements GAction{
 	 * 
 	 * @param container
 	 */
-	public void CreateTriangle(GeometryContainer container) {
+	public CreateTriangle(GeometryContainer container) {
 		cont = container;
 	}
         

@@ -15,7 +15,7 @@ public class CreateSquare implements GAction{
 	 * 
 	 * @param container
 	 */
-	public void CreateSquare(GeometryContainer container) {
+	public CreateSquare(GeometryContainer container) {
 		cont = container;
 	}
         
