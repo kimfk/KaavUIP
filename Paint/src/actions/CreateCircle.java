@@ -1,10 +1,21 @@
 package actions;
 
-import kaav.gestures.DataPackage;
+import kaav.main.GeometryContainer;
+import gestures.DataPackage;
 import kaav.main.GAction;
 
 public class CreateCircle implements GAction{
-	@Override
+	GeometryContainer cont;
+
+	/**
+	 * Pass this a container into which objects will be put.
+	 * 
+	 * @param container
+	 */
+	public void CreateCircle(GeometryContainer container) {
+		cont = container;
+	}
+
 	/**
 	 * This method is called by the gesturizer when the appropriate gesture has
 	 * been input into the system.
@@ -16,11 +27,5 @@ public class CreateCircle implements GAction{
 		float a = 100;
 		
 		cont.createCircle(x, y, a);
-	}
-
-	@Override
-	public void act(gestures.DataPackage p) {
-		// TODO Auto-generated method stub
-		
 	}
 }
