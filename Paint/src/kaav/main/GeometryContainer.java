@@ -50,4 +50,12 @@ public class GeometryContainer {
 	public void createCircle(float x, float y, float radius){
 		drawables.add(new RealCircle((int)x,(int)y,(int)radius));
 	}
+        
+        public void CreateSquare(float x, float y, float width,float hight ){
+		drawables.add(new RealRectangle((int)x,(int)y,(int)width,(int)hight));
+	}
+
+    public void CreateTriangle(float x, float y, float width, float hight) {
+         drawables.add(new RealTriangle((int)x,(int)y,(int)width,(int)hight));
+    }
 }
