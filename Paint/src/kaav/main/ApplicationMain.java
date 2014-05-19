@@ -24,6 +24,8 @@ public class ApplicationMain implements Runnable {
 		GeometryContainer container = new GeometryContainer();
 		RenderingEngine renderer = new RenderingEngine(container);
 		
+		gesturizer.configureDefaultSetup(container);
+		
 		renderer.setUndecorated(true);
 		renderer.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 device.setFullScreenWindow(renderer);
