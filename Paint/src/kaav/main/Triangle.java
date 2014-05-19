@@ -42,7 +42,7 @@ public class Triangle extends JComponent implements Drawable
 		frame.setVisible(true);
 	}
 
-    @Override
+    //@Override
     public void draw() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -126,6 +126,12 @@ public class Triangle extends JComponent implements Drawable
                                
 				g.drawPolygon(xPoints,yPoints,3);
                                 
+                                System.out.println("x: "+ x);
+                                System.out.println("y: "+ y);
+                                System.out.println("width "+ mouseX_dragged);
+                                System.out.println("hight "+ mouseY_dragged);
+                                
+                                
                                 //System.out.println("i am iside mouse pint loop");
 			}
 		}
@@ -141,6 +147,11 @@ public class Triangle extends JComponent implements Drawable
 			coloredTriangles.clear();
 			repaint();
 		}
+
+    @Override
+    public void draw(Graphics g, double width, double height) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 		class MyMouseListener extends MouseInputAdapter
 		{

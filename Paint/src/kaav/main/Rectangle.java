@@ -18,7 +18,7 @@ public class Rectangle extends JComponent implements Drawable
       private Point startPoint = null;
       private Point endPoint = null;
 
-	/*public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -40,7 +40,7 @@ public class Rectangle extends JComponent implements Drawable
 		frame.setSize(400, 400);
 		frame.setLocationRelativeTo( null );
 		frame.setVisible(true);
-	}*/
+	}
 
         public void draw() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -141,6 +141,7 @@ public class Rectangle extends JComponent implements Drawable
 				int width = Math.abs(startPoint.x - endPoint.x);
 				int height = Math.abs(startPoint.y - endPoint.y);
 				g.drawRect(x, y, width, height);
+                                
 			}
 		}
 
@@ -156,8 +157,13 @@ public class Rectangle extends JComponent implements Drawable
 			repaint();
 		}
 
-    @Override
+    //@Override
     public void draw(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void draw(Graphics g, double width, double height) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -189,6 +195,11 @@ public class Rectangle extends JComponent implements Drawable
 				yMax = Math.max(yMax, endPoint.y);
 				repaint(xMin, yMin, xMax - xMin + 2, yMax - yMin + 2);
 				//repaint();
+                                System.out.println(xMin);
+                                System.out.println(yMin);
+                                System.out.println(xMax - xMin + 2);
+                                System.out.println(yMax - yMin + 2);
+                                
 			}
 
 			public void mouseReleased(MouseEvent e)
@@ -211,6 +222,7 @@ public class Rectangle extends JComponent implements Drawable
 
 				//startPoint = null;
                                 */
+                            
 			}
 		}
 

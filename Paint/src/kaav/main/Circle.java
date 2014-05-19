@@ -89,6 +89,11 @@ public class Circle extends JComponent implements Drawable{
             }
              
             graphics2d.drawOval(x, y, width, hight);
+            
+            System.out.println("x: "+ x);
+              System.out.println("y: "+ y);
+              System.out.println("width "+ width);
+              System.out.println("hight "+ hight);
            // graphics2d.drawRect(x, y, w, h);
             
         }else{
@@ -108,10 +113,7 @@ public class Circle extends JComponent implements Drawable{
 		frame.setVisible(true);
     }
 
-    @Override
-    public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public void scale(float factor) {
@@ -122,6 +124,11 @@ public class Circle extends JComponent implements Drawable{
 
     @Override
     public void translate(float x, float y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void draw(Graphics g, double width, double height) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
