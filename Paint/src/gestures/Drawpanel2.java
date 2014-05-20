@@ -23,7 +23,7 @@ public class Drawpanel2 extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JLabel emptyLabel = new JLabel("KAAV: Testing Application");
+		JLabel emptyLabel = new JLabel();
 		emptyLabel.setPreferredSize(new Dimension(600, 600));
 		this.getContentPane().add(emptyLabel, BorderLayout.CENTER);
 		this.pack();

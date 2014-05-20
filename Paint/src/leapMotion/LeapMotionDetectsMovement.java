@@ -77,11 +77,11 @@ public class LeapMotionDetectsMovement extends Listener {
 		    		if(position1.getZ() < 0) {
 		    		temporary = frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition());
 		    		coordinateslist.add(new SimpleVector(temporary.getX(), temporary.getY()));
-		    		System.out.println("- Z, add to the list : " + frame.fingers().get(0).tipPosition());
+		    		//System.out.println("- Z, add to the list : " + frame.fingers().get(0).tipPosition());
 		    		//coordinateslist.add(frame.fingers().get(0).tipPosition());
 		    	}
 		    	else if((position1.getZ()>0) && !coordinateslist.isEmpty()){
-		    	    System.out.println("Now i will send the list to andreas: " + coordinateslist.toString());
+		    	  //  System.out.println("Now i will send the list to andreas: " + coordinateslist.toString());
 		    	    gesturizer.compare(coordinateslist);
 		    		coordinateslist.clear();
 		    	} 		
@@ -91,7 +91,7 @@ public class LeapMotionDetectsMovement extends Listener {
         		//Be sended to .... to replace the picture
 	    	else if(amount_fingers == 2 && position1.getZ() < 0 && position2.getZ() <0){
 	    		coordinateslist.clear();
-	    		System.out.println("Drag item to new position: " +frame.fingers().get(0).tipPosition());
+	    		//System.out.println("Drag item to new position: " +frame.fingers().get(0).tipPosition());
 	    		temporary = frame.interactionBox().normalizePoint(frame.fingers().get(0).tipPosition());
 	    		// send (new SimpleVector(temporary.getX(), temporary.getY()));) to andreas
 	        	//send new coordinates to andreas 		
@@ -102,7 +102,7 @@ public class LeapMotionDetectsMovement extends Listener {
         
         //If two hands are shown, the figure will be glued to his spot, it is now set. 
         if (amount_hands ==2){
-        	System.out.println("The figure is now placed");
+        	//System.out.println("The figure is now placed");
         	coordinateslist.clear();
         	//Say that this figure can be printed on the spot where he now is. 
         }
