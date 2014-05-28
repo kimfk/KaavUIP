@@ -34,8 +34,9 @@ public class ApplicationMain implements Runnable {
 
 		renderer.setUndecorated(true);
 		renderer.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		renderer.setVisible(true);
 		device.setFullScreenWindow(renderer);
-
+		
 		leapMotion.LeapMotionDetectsMovement listener = new leapMotion.LeapMotionDetectsMovement(
 				gesturizer);
 		Controller controller = new Controller();

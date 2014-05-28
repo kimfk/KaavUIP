@@ -21,6 +21,11 @@ public class GeometryContainer {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = screenSize.getWidth();
 		double height = screenSize.getHeight();
+		
+		drawables.add(new RealCircle(0, 0, 50));
+		drawables.add(new RealCircle((int)width, 0, 50));
+		drawables.add(new RealCircle(0, (int)height, 50));
+		drawables.add(new RealCircle((int)width, (int)height, 50));
 	}
 
 	/**
@@ -52,7 +57,7 @@ public class GeometryContainer {
 		drawables.add(new RealCircle((int)x,(int)y,(int)radius));
 	}
         
-        public void CreateSquare(float x, float y, float width,float hight ){
+	public void CreateSquare(float x, float y, float width,float hight ){
 		drawables.add(new RealRectangle((int)x,(int)y,(int)width,(int)hight));
 	}
 
