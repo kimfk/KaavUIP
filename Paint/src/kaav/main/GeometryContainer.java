@@ -44,6 +44,7 @@ public class GeometryContainer {
 	 * This is a trivial implementation of Redo
 	 */
 	public void redo() {
+		drawables.add(redoStack.get(redoStack.size()));
 
 	}
 	
