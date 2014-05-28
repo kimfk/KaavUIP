@@ -29,12 +29,12 @@ public class ApplicationMain implements Runnable {
 		Gesturizer gesturizer = new Gesturizer(400, 110);
 		GeometryContainer container = new GeometryContainer();
 		RenderingEngine renderer = new RenderingEngine(container);
-
+		
 		gesturizer.configureDefaultSetup(container);
+		
 		device.setFullScreenWindow(renderer);
-
-		renderer.setUndecorated(true);
 		renderer.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		renderer.setUndecorated(true);
 		
 		leapMotion.LeapMotionDetectsMovement listener = new leapMotion.LeapMotionDetectsMovement(
 				gesturizer);
