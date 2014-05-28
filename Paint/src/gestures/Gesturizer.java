@@ -259,11 +259,14 @@ public class Gesturizer {
 	}
 
 	public void compare(ArrayList<SimpleVector> sequence) {
-		panel.setBaseList(sequence);
+		if (panel != null)
+			panel.setBaseList(sequence);
 		
 		// Filter the input sequence 
 		ArrayList<SimpleVector> list = filter(sequence);
-		panel.setResultList(list);
+		
+		if (panel != null)
+			panel.setResultList(list);
 				
 		ArrayList<SimpleVector> ol = new ArrayList<SimpleVector>();
 		ol.add(new SimpleVector(0,1));

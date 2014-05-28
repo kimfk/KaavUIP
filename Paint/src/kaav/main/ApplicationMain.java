@@ -53,6 +53,5 @@ public class ApplicationMain implements Runnable {
 
 		// Remove the sample listener when done
 		controller.removeListener(listener);
-
 	}
 }

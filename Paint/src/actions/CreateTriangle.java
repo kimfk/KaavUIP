@@ -24,8 +24,6 @@ public class CreateTriangle implements GAction{
                 float width = (float)(data.maximumX - data.minimumX);
                 float hight = (float)(data.maximumY - data.minimumY);
 		
-		
 		cont.CreateTriangle(x, y, width,hight);
-
 	}
 }

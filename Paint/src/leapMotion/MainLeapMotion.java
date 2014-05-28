@@ -39,5 +39,4 @@ public class MainLeapMotion {
 	    // Remove the sample listener when done
 	    controller.removeListener(listener);
 	}
-
 }
