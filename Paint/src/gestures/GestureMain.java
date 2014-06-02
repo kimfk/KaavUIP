@@ -7,6 +7,8 @@ import javax.swing.SwingUtilities;
 
 
 
+
+import kaav.main.GeometryContainer;
 import actions.*;
 
 
@@ -22,6 +24,7 @@ public class GestureMain {
 		
 		Drawpanel2 panel2 = new Drawpanel2();
 		SwingUtilities.invokeLater(panel2);		
+		GeometryContainer container = new GeometryContainer();
 		
 		Levenshtein l = new Levenshtein();
 		//l.getDistance(new int[]{1, 1, 1}, new int[]{1, 1, 1});
@@ -93,7 +96,7 @@ public class GestureMain {
 		square2.add(2);
 
 		g.teachSequence(5, square);
-		g.teachAction(5, new CreateCircle());
+		g.teachAction(5, new CreateCircle(container));
 		//g.compareAndTrigger(input);	
 		
 		ArrayList<SimpleVector> testList = new ArrayList<SimpleVector>();
